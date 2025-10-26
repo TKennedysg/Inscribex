@@ -21,10 +21,3 @@ class aspirante:
         print("Consultando estado de Aspirante")
         print("Nombre: ",self.nombre)
         print("Cedula: ",self.cedula)
-
-nombre = input("Ingrese su nombre: ")
-cedula = input("Ingrese su cedula: ")
-correo = input("Ingrese su correo: ")
-telefono = input("Ingrese su telefono: ")
-direccion = input("Ingrese su direccion: ")
-#NOSE SI ESTO ESTA BIEN, AHI LO DEJO MAS TARDE SE REVISA, AUNQUE VIENDO LOS DATOS DEBEN IMPORTARSE NO INGRESARSE.
