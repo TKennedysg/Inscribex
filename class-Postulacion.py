@@ -14,9 +14,9 @@ class Postulacion:
     
     def cancelar_seleccion(self,seleccion):
         if seleccion == "No":
-            print(f"{seleccion}, seleccion cancelada")
+            print("Selección cancelada")
         else:
-            print(f"{seleccion}, seleccion confirmada")
+            print("Selección confirmada")
     
 simulacion1 =  Postulacion("5-Octubre", "500","En proceso","Ninguna")
 simulacion1.escoger_carrera("Arquitectura")

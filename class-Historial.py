@@ -5,15 +5,17 @@ class Historial:
         self.estado = estado
 
     def registrar_historial(self):
-        return f"Historial registrado para {self.aspirante} el {self.fecha_actualizada} con estado: {self.estado}"
-    
-    def limpiar_historial(self):
-        self.aspirante = None
-        self.fecha_actualizada = None
-        self.estado = None
-        return "Historial limpiado exitosamente."
+        print(f"Historial registrado para {self.aspirante} el {self.fecha_actualizada} con estado: {self.estado}")
     
     def consultar_historial(self):
-        return f"Aspirante: {self.aspirante}, Fecha Actualizada: {self.fecha_actualizada}, Estado: {self.estado}"
+        print (f"Aspirante: {self.aspirante}, Fecha Actualizada: {self.fecha_actualizada}, Estado: {self.estado}")
     
-    
+    def limpiar_historial(self):
+        self.aspirante = ""
+        self.fecha_actualizada = ""
+        self.estado = ""
+        print("Historial limpiado.")
+hist = Historial("Ana Gomez", "2025-10-25", "Activo")
+hist.registrar_historial()
+hist.consultar_historial()  
+hist.limpiar_historial()
