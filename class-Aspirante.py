@@ -5,7 +5,6 @@ class aspirante:
         self.correo=correo
         self.telefono=telefono
         self.direccion=direccion
-        pass
     def Registrarse(self):
         print("Aspirante Registrado")
         print("Nombre: ",self.nombre)
