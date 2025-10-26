@@ -1,20 +1,23 @@
 class PlanificacionExamen:
-    def __init__(self, fecha, aula, monitor):
+    def __init__(self, fecha, aula, horarios_disponibles, capacidad, planificacion, cantidad, monitoreo):
         self.fecha = fecha
         self.aula = aula
-        self.monitor = monitor
+        self.horarios_disponibles = horarios_disponibles
+        self.capacidad = capacidad
+        self.planificacion = planificacion
+        self.cantidad = cantidad
+        self.monitoreo = monitoreo
         self.participantes = []
 
-    def asignar(self, aspirante):
-        self.participantes.append(aspirante)
-        return f"Aspirante {aspirante} asignado al examen del {self.fecha} en el aula {self.aula}"
+    def Asignar(self, aspirante):
+        if len(self.participantes) < self.capacidad:
+            self.participantes.append(aspirante)
+            return f"Aspirante {aspirante} ha sido asignado al examen del {self.fecha} en el aula {self.aula}."
+        else:
+            return f"No se puede asignar, el Aula {self.aula} ha alcanzado su capacidad maxima ({self.capacidad}) de personas."
+    
+    def Organizar(self):
+        return f"Examen organizado en {self.aula} con capacidad de {self.capacidad} alumnos bajo modalidad '{self.planificacion}'."
 
-    def modificar(self, nueva_fecha=None, nuevo_aula=None):
-        if nueva_fecha:
-            self.fecha = nueva_fecha
-        if nuevo_aula:
-            self.aula = nuevo_aula
-        return f"Planificación actualizada: Fecha {self.fecha}, Aula {self.aula}"
-
-    def generarCronograma(self):
-        return f"Examen planificado el {self.fecha} en aula {self.aula}, Monitor: {self.monitor}, Participantes: {len(self.participantes)}"
+    def Generar_Cronograma(self):
+        return f"Cronograma generado. Aula: {self.aula}, Planificación: {self.planificacion}, Monitoreo: {self.monitoreo}."
