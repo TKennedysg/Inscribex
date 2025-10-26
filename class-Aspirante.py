@@ -20,3 +20,8 @@ class aspirante:
         print("Consultando estado de Aspirante")
         print("Nombre: ",self.nombre)
         print("Cedula: ",self.cedula)
+
+asp = aspirante("Juan Perez","1234567890","juan.perez@gmail.com","0987654321","Calle False 123")
+asp.Registrarse()
+asp.postularse()
+asp.consultarEstado()
