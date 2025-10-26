@@ -8,6 +8,12 @@ class Jornada():
    
     def modificar(self):
         print("Jornada se ha modificado")
+
+    def mostrar(self):
+        print("-----Modalidades-----")
+        print("Matutina")
+        print("Vespertina")
+        print("Nocturna")
    
     def consultar(self):
         print(f"Modalidad: {self.modalidad}")
