@@ -21,7 +21,7 @@ class aspirante:
         print("Nombre: ",self.nombre)
         print("Cedula: ",self.cedula)
 
-asp = aspirante("Juan Perez","1234567890","juan.perez@gmail.com","0987654321","Calle False 123")
+asp = aspirante("Juan Perez","1309768932","juan.perez@gmail.com","0987654321","Av. Siempre Falsa 33")
 asp.Registrarse()
 asp.postularse()
 asp.consultarEstado()
