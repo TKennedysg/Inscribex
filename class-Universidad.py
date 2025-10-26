@@ -1,15 +1,17 @@
 class Universidad:
-    def __init__(self, nombre, ubicacion, rector):
-        print(f"Universidad {nombre} creada con rector {rector}.")
+    def __init__(self, nombre, ubicacion, profesores, estudiantes, carrera, malla_curricular):
         self.nombre = nombre
         self.ubicacion = ubicacion
-        self.rector = rector
+        self.profesores = profesores
+        self.estudiantes = estudiantes
+        self.carrera = carrera
+        self.malla_curricular = malla_curricular
 
-    def asignar_curso(self):
-        print(f"La universidad {self.nombre} está asignando cursos a sus facultades.")
+    def Asignacion_Cupos(self):
+        return f"Se han asignado cupos en la universidad '{self.nombre}' para la carrera {self.carrera}."
 
     def publicar_oferta(self):
-        print(f"La universidad {self.nombre} ha publicado la nueva oferta académica.")
+        print(f"La universidad {self.nombre} ha publicado una nueva oferta academica.")
 
     def recibir_postulaciones(self):
-        print(f"La universidad {self.nombre} está recibiendo postulaciones de aspirantes.")
+        print(f"La universidad {self.nombre} esta recibiendo postulaciones de aspirantes.")

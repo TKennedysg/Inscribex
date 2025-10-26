@@ -5,11 +5,20 @@ class ValidacionRegistro:
         self.resultado = resultado
         self.observacion = observacion
 
-    def verificar(self):
-        print(f"Verificando datos del registro... Resultado: {self.resultado}")
+    def verificarRegistro(self, estado_documentos):
+        if estado_documentos:
+            self.resultado = "Validado"
+            self.observacion = "Documentos validos."
+        else:
+            self.resultado = "Rechazado"
+            self.observacion = "Faltan documentos o estan incorrectos."
+        return self.resultado
 
     def aprobar(self):
-        print(f"Registro aprobado. Observación: {self.observacion}")
+        print(f"Registro aprobado, su Observacion: {self.observacion}")
 
-    def generar_resultado(self):
-        print(f"Generando resultado final de la validación: {self.resultado}")
+    def generarResultado(self):
+        return f"Fecha: {self.fecha_validacion}, Resultado: {self.resultado}, Observacion: {self.observacion}"
+
+    def obtenerEstado(self):
+        return self.resultado

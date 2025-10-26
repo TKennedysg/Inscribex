@@ -15,5 +15,3 @@ class Examen:
     def calificar_examen(self, nueva_calificacion):
         self.calificacion = nueva_calificacion
         return f"La calificación del examen de {self.area} ha sido actualizada a {self.calificacion}."
-    
-    

@@ -1,15 +1,20 @@
 class PlanificacionExamen:
     def __init__(self, fecha, aula, monitor):
-        print(f"Planificación creada para el examen del {fecha} en aula {aula}.")
         self.fecha = fecha
         self.aula = aula
         self.monitor = monitor
+        self.participantes = []
 
-    def asignar(self):
-        print(f"Asignando monitor {self.monitor} al aula {self.aula} para el examen del {self.fecha}.")
+    def asignar(self, aspirante):
+        self.participantes.append(aspirante)
+        return f"Aspirante {aspirante} asignado al examen del {self.fecha} en el aula {self.aula}"
 
-    def modificar(self):
-        print(f"Modificando la planificación del examen en aula {self.aula}.")
+    def modificar(self, nueva_fecha=None, nuevo_aula=None):
+        if nueva_fecha:
+            self.fecha = nueva_fecha
+        if nuevo_aula:
+            self.aula = nuevo_aula
+        return f"Planificación actualizada: Fecha {self.fecha}, Aula {self.aula}"
 
-    def consultar(self):
-        print(f"Consulta: examen planificado el {self.fecha} en aula {self.aula}, a cargo de {self.monitor}.")
+    def generarCronograma(self):
+        return f"Examen planificado el {self.fecha} en aula {self.aula}, Monitor: {self.monitor}, Participantes: {len(self.participantes)}"
