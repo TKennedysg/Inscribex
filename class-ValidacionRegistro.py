@@ -1,6 +1,5 @@
 class ValidacionRegistro:
     def __init__(self, fecha_validacion, resultado, observacion):
-        print(f"Se inicia el proceso de validación del registro en la fecha {fecha_validacion}.")
         self.fecha_validacion = fecha_validacion
         self.resultado = resultado
         self.observacion = observacion
@@ -22,3 +21,9 @@ class ValidacionRegistro:
 
     def obtenerEstado(self):
         return self.resultado
+    
+validacion = ValidacionRegistro(fecha_validacion="2025-10-26", resultado="", observacion="")
+print(validacion.verificarRegistro(True))
+validacion.aprobar()
+print(validacion.generarResultado())
+print("Estado actual:", validacion.obtenerEstado())

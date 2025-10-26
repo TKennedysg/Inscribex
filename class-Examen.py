@@ -16,7 +16,7 @@ class Examen:
         self.calificacion = nueva_calificacion
         print (f"La calificación del examen de {self.area} ha sido actualizada a {self.calificacion}.")
 
-ex = Examen("Matemáticas", 35, "10:00 AM - 25-10-2025 ", "Teórico-Practico", 650)
+ex = Examen("Matemáticas, Fisica", 60, "10:00 AM - 25-10-2025 ", "Teórico-Practico", 650)
 ex.realizar_examen()
 ex.generar_reporte()
 ex.calificar_examen(720)

@@ -20,7 +20,7 @@ class examenResultado:
     def obtenerreporte(self):
         reporte = f"Fecha: {self.fecha}, Calificación: {self.calificacion}, Estado: {self.estado}"
         return reporte
-resex = examenResultado(500, "Pendiente", "2025-10-15")
+resex = examenResultado(600, "Pendiente", "2025-10-15")
 resex.revisarResultado()
 resex.obtenerreporte()
 resex.validarResultado()

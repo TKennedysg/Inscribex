@@ -13,3 +13,8 @@ class Sede:
 
     def obtenerDatos(self):
         return f"Sede: {self.nombre}, Direccion: {self.direccion}, Ciudad: {self.ciudad}, Estado: {'Activa' if self.activa else 'Inactiva'}"
+
+sede1 = Sede(nombre="Sede Central", direccion="Av. Universidad Laica Eloy Alfaro", ciudad="Manta")
+sede1.asignar()
+sede1.registrar()
+print(sede1.obtenerDatos())
