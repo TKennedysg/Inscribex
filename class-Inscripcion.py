@@ -29,7 +29,7 @@ class Inscripcion():
             
 
 
-Autenticacion1 = Autenticacion("tyrone27@gmail.com",123321)
+Autenticacion1 = Autenticacion("tyrone27@gmail.com","123321")
 Inscripcion1 = Inscripcion("tyrone","26/10/2025","123",Autenticacion1,)
 
 Inscripcion1.ingresar_datos()
