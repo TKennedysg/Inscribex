@@ -11,7 +11,7 @@ class Periodo_Academico:
         print("Periodo Terminado")
 
     def consultar_periodo(self):
-        print("Ingrese el periodo: ")
+        print(f"Periodo consultado")
 
 Periodo =  Periodo_Academico("15-Septiemnbre", "7-Febrero","Inicidado")
 Periodo.abrir_periodo(input("Ingrese el periodo a iniciar: "))
