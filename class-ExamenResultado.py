@@ -1,26 +1,28 @@
 class examenResultado:
     def __init__(self, calificacion, estado, fecha):
-        self.calificacion = calificacion
-        self.estado = estado
-        self.fecha = fecha
+        self.__calificacion = calificacion
+        self.__estado = estado
+        self._fecha = fecha
     
-    def revisarResultado(self):
-        if self.calificacion >= 600:
-            self.estado = "Aprobado"
+    def __revisarResultado(self):
+        if self.__calificacion >= 600:
+            self.__estado = "Aprobado"
         else:
-            self.estado = "Reprobado"
-        return self.estado
+            self.__estado = "Reprobado"
+        return self.__estado
+    def actualizarEstado(self):
+        return self.__revisarResultado()
     
     def validarResultado(self):
-        if self.estado == "Aprobado":
+        if self.__estado == "Aprobado":
             print("El examen ha sido aprobado.")
         else:
             print("El examen no ha sido aprobado.")
 
     def obtenerreporte(self):
-        reporte = f"Fecha: {self.fecha}, Calificación: {self.calificacion}, Estado: {self.estado}"
+        reporte = f"Fecha: {self._fecha}, Calificación: {self.__calificacion}, Estado: {self.__estado}"
         return reporte
 resex = examenResultado(600, "Pendiente", "2025-10-15")
-resex.revisarResultado()
-resex.obtenerreporte()
+resex.actualizarEstado()
+print(resex.obtenerreporte())
 resex.validarResultado()
