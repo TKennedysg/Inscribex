@@ -22,4 +22,8 @@ class ValidacionRegistro:
     def obtenerEstado(self):
         return self.resultado
     
-#hola
+validacion = ValidacionRegistro(fecha_validacion="2025-10-26", resultado="", observacion="")
+print(validacion.verificarRegistro(True))
+validacion.aprobar()
+print(validacion.generarResultado())
+print("Estado actual:", validacion.obtenerEstado())

@@ -21,3 +21,18 @@ class PlanificacionExamen:
 
     def Generar_Cronograma(self):
         return f"Cronograma generado. Aula: {self.aula}, Planificación: {self.planificacion}, Monitoreo: {self.monitoreo}."
+    
+plan_examen = PlanificacionExamen(
+    fecha="2025-11-10",
+    aula="A101",
+    horarios_disponibles=["08:00-10:00", "10:30-12:30"],
+    capacidad=2,
+    planificacion="Presencial",
+    cantidad=30,
+    monitoreo="Supervisor 1"
+)
+print(plan_examen.Asignar("Juan Perez"))
+print(plan_examen.Asignar("Ana Mendoza"))
+print(plan_examen.Asignar("Carlos Vera"))
+print(plan_examen.Organizar())
+print(plan_examen.Generar_Cronograma())

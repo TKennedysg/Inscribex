@@ -15,3 +15,15 @@ class Universidad:
 
     def recibir_postulaciones(self):
         print(f"La universidad {self.nombre} esta recibiendo postulaciones de aspirantes.")
+
+uni = Universidad(
+    nombre="Universidad Laica Eloy Alfaro de Manabi",
+    ubicacion="Manta",
+    profesores=["Prof. Jarol", "Prof. Ener Valencia"],
+    estudiantes=["Pepito", "Pinocho"],
+    carrera="Ingenieria de Software",
+    malla_curricular=["Algebra Lineal", "Programacion Orientada a Objetos", "Modelado Orientado a OBjetos"]
+)
+print(uni.Asignacion_Cupos())
+uni.publicar_oferta()
+uni.recibir_postulaciones()
