@@ -19,10 +19,19 @@ class Inscripcion():
         self.estado = estado
 
     def ingresar_datos(self):
-        print("Se han ingredado los datos correctamente")
+        print("Se han ingresado los datos correctamente")
     def registrarse(self):
         print("se ha registrado correctamente")
+        correo = input("Ingrese su correo: ")
+        contraseña = input("Ingrese su contraseña: ")
+        self.autenticacion.iniciar_sesion(correo, contraseña)
+
+            
 
 
+Autenticacion1 = Autenticacion("tyrone27@gmail.com",123321)
+Inscripcion1 = Inscripcion("tyrone","26/10/2025","123",Autenticacion1,)
 
+Inscripcion1.ingresar_datos()
+Inscripcion1.registrarse()
 
