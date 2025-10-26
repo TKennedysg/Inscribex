@@ -18,5 +18,11 @@ class Inscripcion():
         self.autenticacion = autenticacion
         self.estado = estado
 
+    def ingresar_datos(self):
+        print("Se han ingredado los datos correctamente")
+    def registrarse(self):
+        print("se ha registrado correctamente")
+
+
 
 
