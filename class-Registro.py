@@ -14,6 +14,7 @@ class Registro:
 
     def obtenerDatos(self):
         print(f"Datos = ID: {self.idRegistro}, Correo: {self.correo}, Estado: {self.estado}")
+
 simulacion1 = Registro("411", "karpite@gmail.com", "En proceso")
 simulacion1.registrar()
 simulacion1.actualizarEstado("Terminado")
