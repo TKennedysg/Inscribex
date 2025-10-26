@@ -21,4 +21,3 @@ class aspirante:
         print("Consultando estado de Aspirante")
         print("Nombre: ",self.nombre)
         print("Cedula: ",self.cedula)
-#NOSE SI ESTO ESTA BIEN, AHI LO DEJO MAS TARDE SE REVISA, AUNQUE VIENDO LOS DATOS DEBEN IMPORTARSE NO INGRESARSE.
