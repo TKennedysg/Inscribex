@@ -44,7 +44,7 @@ class Administrador(Usuario):
         print(f"Cédula: {self.cedula}")
         print(f"Correo: {self.correo}")
 
-asp1 = Aspirante("Juan Perez","1309768932","juan.perez@gmail.com","0987654321","Av. Siempre Falsa 33")
+asp1 = Aspirante("Juan Perez","1309768932","juan.perez@gmail.com","0987654321","Av. Los Eucaliptos 123")
 admin1 = Administrador("Santiago",1234567899,"santy123@gmail.com")
 
 print("----ASPIRANTE----")

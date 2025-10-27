@@ -9,4 +9,3 @@ class Carrera():
         print(f"Nombre:{self.__nombre}")
         print(f"Modalidad:{self._modalidad}")
         print(f"Malla:{self.__malla}")
-

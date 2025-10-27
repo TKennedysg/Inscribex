@@ -4,7 +4,7 @@ class Postulacion:
               f"con una calificacion de {calificacion_obtenida}, estado {estado}, con prioridad: {prioridad}")
         self._fecha_postulacion=fecha_postulacion
         self._estado=estado
-        self.__calificacion_obtenida=calificacion_obtenida
+        self.__calificacion_obtenida = calificacion_obtenida
         self._prioridad=prioridad
 
     def escoger_carrera(self,carrera):
