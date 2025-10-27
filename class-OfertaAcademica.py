@@ -1,29 +1,19 @@
-class Carrera():
-    def __init__(self,area,nombre,modalidad,malla):
-        self.area = area
-        self.nombre = nombre
-        self.modalidad = modalidad
-        self.malla = malla
-    def mostrar(self):
-        print(f"Area:{self.area}")
-        print(f"Nombre:{self.nombre}")
-        print(f"Modalidad:{self.modalidad}")
-        print(f"Malla:{self.malla}")
+from carrera import Carrera 
 
 class Oferta_academica():
     def __init__(self,facultad,carrera,jornada,cupos,modalidad):
-        self.facultad = facultad
-        self.carrera = carrera
-        self.jornada = jornada
-        self.cupos = cupos
-        self.modalidad = modalidad
+        self.__facultad = facultad
+        self.__carrera = carrera
+        self.__jornada = jornada
+        self._cupos = cupos
+        self.__modalidad = modalidad
 
     def visualizar(self):
         print("-----OFERTA ACADEMICA-----")
-        print(f"Facultad:{self.facultad}")
-        self.carrera.mostrar()
-        print(f"Jornada:{self.jornada}")
-        print(f"Modalidades: {self.modalidad}")
+        print(f"Facultad:{self.__facultad}")
+        self.__carrera.mostrar()
+        print(f"Jornada:{self.__jornada}")
+        print(f"Modalidades: {self.__modalidad}")
         
     def publicar(self):
         print("Se ha publicado la oferta academica")

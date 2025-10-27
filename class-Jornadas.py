@@ -1,7 +1,7 @@
 class Jornada():
     def __init__(self,hora,modalidad=""):
-        self.hora = hora
-        self.modalidad = modalidad
+        self._hora = hora
+        self._modalidad = modalidad
 
     def asignar(self):
         print("Se ha asignado la jornada")
@@ -16,13 +16,13 @@ class Jornada():
         print("Nocturna")
    
     def consultar(self):
-        print(f"Modalidad: {self.modalidad}")
+        print(f"Modalidad: {self._modalidad}")
 
-        if self.hora >=7 and self.hora <=11:
+        if self._hora >=7 and self._hora <=11:
             print("jornada matutina")
-        elif self.hora >=12 and self.hora <=17:
+        elif self._hora >=12 and self._hora <=17:
             print("Jornada vespertina")
-        elif self.hora >=18 and self.hora <=22:
+        elif self._hora >=18 and self._hora <=22:
             print("Jornada nocturna")
         else:
             print("la hora no perteneces a ninguna jornada")
