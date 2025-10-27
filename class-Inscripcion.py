@@ -1,3 +1,5 @@
+from autenticacion import Autenticacion
+
 class Inscripcion():
     def __init__(self,aspirante,fecha,id_incripcion,autenticacion,estado="pendiente"):
         self.aspirante = aspirante
@@ -14,9 +16,8 @@ class Inscripcion():
         contraseña = input("Ingrese su contraseña: ")
         self.autenticacion.iniciar_sesion(correo, contraseña)
 
-            
+Autenticacion1 = Autenticacion("tyrone27@gmail.com","123321")
 Inscripcion1 = Inscripcion("tyrone","26/10/2025","123",Autenticacion1,)
-
 Inscripcion1.ingresar_datos()
 Inscripcion1.registrarse()
 

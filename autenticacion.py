@@ -9,4 +9,3 @@ class Autenticacion():
         else:
             print("correo o contraseña incorrectos")
 
-Autenticacion1 = Autenticacion("tyrone27@gmail.com","123321")
