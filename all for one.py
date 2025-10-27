@@ -1,11 +1,11 @@
 class Universidad:
     def __init__(self, nombre, ubicacion, profesores, estudiantes, carrera, malla_curricular):
-        self.nombre = nombre
-        self.ubicacion = ubicacion
-        self.profesores = profesores
-        self.estudiantes = estudiantes
-        self.carrera = carrera
-        self.malla_curricular = malla_curricular
+        self.nombre = nombre                      
+        self.ubicacion = ubicacion                
+        self._profesores = profesores             
+        self._estudiantes = estudiantes           
+        self.carrera = carrera                    
+        self._malla_curricular = malla_curricular 
 
     def Asignacion_Cupos(self):
         return f"Se han asignado cupos en la universidad '{self.nombre}' para la carrera {self.carrera}."
@@ -16,35 +16,40 @@ class Universidad:
     def recibir_postulaciones(self):
         print(f"La universidad {self.nombre} esta recibiendo postulaciones de aspirantes.")
 
+    def mostrar_malla(self):
+        print(f"Malla curricular de {self.carrera}:")
+        for materia in self._malla_curricular:
+            print("-", materia)
+
 uni = Universidad(
-    nombre="Universidad Laica Eloy Alfaro de Manabi",
+    nombre="Universidad Laica Eloy Alfaro de Manabí",
     ubicacion="Manta",
     profesores=["Prof. Jarol", "Prof. Ener Valencia"],
     estudiantes=["Pepito", "Pinocho"],
-    carrera="Ingenieria de Software",
-    malla_curricular=["Algebra Lineal", "Programacion Orientada a Objetos", "Modelado Orientado a OBjetos"]
+    carrera="Ingeniería de Software",
+    malla_curricular=["Álgebra Lineal", "Programación Orientada a Objetos", "Modelado Orientado a Objetos"]
 )
 print(uni.Asignacion_Cupos())
 uni.publicar_oferta()
 uni.recibir_postulaciones()
+uni.mostrar_malla()
 
 # ------------------------------------------------------------------------------------------------------------------
 
 class Sede:
     def __init__(self, nombre, direccion, ciudad):
-        self.nombre = nombre
-        self.direccion = direccion
-        self.ciudad = ciudad
-        self.activa = True
+        self.nombre = nombre          
+        self._direccion = direccion   
+        self.ciudad = ciudad          
+        self.__activa = True         
 
     def asignar(self):
         print(f"Asignando recursos y personal a la sede {self.nombre}.")
-
     def registrar(self):
-        print(f"Registrando la sede {self.nombre} con dirección {self.direccion} en el sistema.")
-
+        print(f"Registrando la sede {self.nombre} con dirección {self._direccion} en el sistema.")
     def obtenerDatos(self):
-        return f"Sede: {self.nombre}, Direccion: {self.direccion}, Ciudad: {self.ciudad}, Estado: {'Activa' if self.activa else 'Inactiva'}"
+        estado = "Activa" if self.__activa else "Inactiva"
+        return f"Sede: {self.nombre}, Dirección: {self._direccion}, Ciudad: {self.ciudad}, Estado: {estado}"
 
 sede1 = Sede(nombre="Sede Central", direccion="Av. Universidad Laica Eloy Alfaro", ciudad="Manta")
 sede1.asignar()
@@ -284,30 +289,30 @@ ex.generar_reporte()
 
 class PlanificacionExamen:
     def __init__(self, fecha, aula, horarios_disponibles, capacidad, planificacion, cantidad, monitoreo):
-        self.fecha = fecha
-        self.aula = aula
-        self.horarios_disponibles = horarios_disponibles
-        self.capacidad = capacidad
-        self.planificacion = planificacion
-        self.cantidad = cantidad
-        self.monitoreo = monitoreo
-        self.participantes = []
+        self.__fecha = fecha                        
+        self.__aula = aula                          
+        self._horarios_disponibles = horarios_disponibles  
+        self.__capacidad = capacidad                
+        self.planificacion = planificacion         
+        self._cantidad = cantidad                   
+        self.__monitoreo = monitoreo                
+        self.__participantes = []                    
 
     def Asignar(self, aspirante):
-        if len(self.participantes) < self.capacidad:
-            self.participantes.append(aspirante)
-            return f"Aspirante {aspirante} ha sido asignado al examen del {self.fecha} en el aula {self.aula}."
+        if len(self.__participantes) < self.__capacidad:
+            self.__participantes.append(aspirante)
+            return f"Aspirante {aspirante} ha sido asignado al examen del {self.__fecha} en el aula {self.__aula}."
         else:
-            return f"No se puede asignar, el Aula {self.aula} ha alcanzado su capacidad maxima ({self.capacidad}) de personas."
+            return f"No se puede asignar, el aula {self.__aula} alcanzó su capacidad máxima ({self.__capacidad})."
     
     def Organizar(self):
-        return f"Examen organizado en {self.aula} con capacidad de {self.capacidad} alumnos bajo modalidad '{self.planificacion}'."
+        return f"Examen organizado en {self.__aula} con capacidad de {self.__capacidad} alumnos bajo modalidad '{self.planificacion}'."
 
     def Generar_Cronograma(self):
-        return f"Cronograma generado. Aula: {self.aula}, Planificación: {self.planificacion}, Monitoreo: {self.monitoreo}."
+        return f"Cronograma generado. Aula: {self.__aula}, Planificación: {self.planificacion}, Monitoreo: {self.__monitoreo}."
     
 plan_examen = PlanificacionExamen(
-    fecha="25/10/2025",
+    fecha="10/11/2025",
     aula="A101",
     horarios_disponibles=["08:00-10:00", "10:30-12:30"],
     capacidad=2,

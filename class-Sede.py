@@ -1,18 +1,17 @@
 class Sede:
     def __init__(self, nombre, direccion, ciudad):
-        self.nombre = nombre
-        self.direccion = direccion
-        self.ciudad = ciudad
-        self.activa = True
+        self.nombre = nombre          
+        self._direccion = direccion   
+        self.ciudad = ciudad          
+        self.__activa = True         
 
     def asignar(self):
         print(f"Asignando recursos y personal a la sede {self.nombre}.")
-
     def registrar(self):
-        print(f"Registrando la sede {self.nombre} con dirección {self.direccion} en el sistema.")
-
+        print(f"Registrando la sede {self.nombre} con dirección {self._direccion} en el sistema.")
     def obtenerDatos(self):
-        return f"Sede: {self.nombre}, Direccion: {self.direccion}, Ciudad: {self.ciudad}, Estado: {'Activa' if self.activa else 'Inactiva'}"
+        estado = "Activa" if self.__activa else "Inactiva"
+        return f"Sede: {self.nombre}, Dirección: {self._direccion}, Ciudad: {self.ciudad}, Estado: {estado}"
 
 sede1 = Sede(nombre="Sede Central", direccion="Av. Universidad Laica Eloy Alfaro", ciudad="Manta")
 sede1.asignar()
