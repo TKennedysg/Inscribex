@@ -1,4 +1,5 @@
 from carrera import Carrera 
+from jornadas import Jornada
 
 class Oferta_academica():
     def __init__(self,facultad,carrera,jornada,cupos,modalidad):
@@ -12,13 +13,14 @@ class Oferta_academica():
         print("-----OFERTA ACADEMICA-----")
         print(f"Facultad:{self.__facultad}")
         self.__carrera.mostrar()
-        print(f"Jornada:{self.__jornada}")
+        self.__jornada.consultar()
         print(f"Modalidades: {self.__modalidad}")
         
     def publicar(self):
         print("Se ha publicado la oferta academica")
 
 C1 = Carrera("Tecnologia","Tecnologia de la informacion","Presencial","2025")
-oferta1 = Oferta_academica("Ciencias de la vida y la Tecnologia",C1,"Matutina",100,"Presencial")
+J1 = Jornada(20,"virtual")
+oferta1 = Oferta_academica("Ciencias de la vida y la Tecnologia",C1,J1,100,"Presencial")
 oferta1.visualizar()
 oferta1.publicar()
