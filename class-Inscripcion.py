@@ -1,4 +1,4 @@
-from autenticacion import Autenticacion
+from Inscribex.login.autenticacion import Autenticacion
 
 class Inscripcion():
     def __init__(self,aspirante,fecha,id_incripcion,autenticacion,estado="pendiente"):
