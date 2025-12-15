@@ -99,7 +99,7 @@ class Inscripcion:
 # Ejemplo de prueba
 if __name__ == "__main__":
     from Aspirante import Aspirante
-    from class-PeriodoAcademico import Periodo_Academico
+    from class_PeriodoAcademico import Periodo_Academico
     
     # Crear objetos de prueba
     aspirante = Aspirante("Carlos Ruiz", "0912345678", "carlos@email.com", "0987654321", "Av. Test 123")

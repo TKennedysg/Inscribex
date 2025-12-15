@@ -1,10 +1,10 @@
 from datetime import datetime
 from Aspirante import Aspirante
-from Periodo_Academico import Periodo_Academico
-from ValidacionRegistro import ValidacionRegistro
-from Inscripcion import Inscripcion
-from Registro import Registro
-from Historial import Historial
+from class_PeriodoAcademico import Periodo_Academico
+from class_ValidacionRegistro import ValidacionRegistro
+from class_Inscripcion import Inscripcion
+from class_Registro import Registro
+from class_Historial import Historial
 
 class SistemaInscripcionCompleto:
     def __init__(self):
