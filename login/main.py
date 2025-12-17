@@ -1,4 +1,3 @@
-# main.py
 from  aspirante import Aspirante, Administrador
 from autenticacion import Autenticacion
 
