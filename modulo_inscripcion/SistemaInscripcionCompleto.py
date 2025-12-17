@@ -8,7 +8,6 @@ if __name__ == "__main__":
     print("=== SISTEMA CON PATRONES BUILDER Y OBSERVER ===\n")
 
     # 1. USANDO BUILDER para crear el Aspirante
-    # Ya no usamos new Aspirante(a,b,c,d,e), usamos pasos lógicos
     print("--- 1. Creando Aspirante con Builder ---")
     builder = AspiranteBuilder()
     aspirante = (builder
