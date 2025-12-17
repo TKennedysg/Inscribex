@@ -1,4 +1,4 @@
-from Inscribex.modulo_oferta.Carrera import Carrera
+from Carrera import Carrera
 
 class CarreraFactory:
 

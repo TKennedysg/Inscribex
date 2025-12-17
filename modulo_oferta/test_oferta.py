@@ -1,16 +1,17 @@
-from modulo_oferta.Dominio_Uni.Universidad import Universidad
-from modulo_oferta.Servicios_Uni.Universidad_Service import UniversidadService
-from modulo_oferta.Sede import Sede
-from modulo_oferta.Carrera import Carrera
-from modulo_oferta.Jornada import Jornada
-from modulo_oferta.OfertaAcademica import OfertaAcademica
-from modulo_oferta.factories.CarreraFactory import CarreraFactory
+from interfaces.Universidad import Universidad
+from Servicios_Uni.UniversidadService import UniversidadService
+from Sede import Sede
+from Carrera import Carrera
+from Jornada import Jornada
+from OfertaAcademica import OfertaAcademica
+from factories.CarreraFactory import CarreraFactory
 
 
 factory = CarreraFactory()
 service = UniversidadService()
 
 u = Universidad("Universidad Laica Eloy Alfaro de Manabí")
+
 
 j1 = Jornada("Matutina")
 j2 = Jornada("Vespertina")

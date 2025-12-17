@@ -1,5 +1,5 @@
 from typing import List
-from interfaces.IUniversidad import IUniversidad
+from modulo_oferta.interfaces.Universidad import IUniversidad
 
 class Universidad(IUniversidad):
     """

@@ -1,7 +1,9 @@
 from abc import ABC, abstractmethod
 
-class IUniversidad(ABC):
-
+class Universidad(ABC):
+    def __init__(self, nombre):
+        self.nombre = nombre
+        
     @abstractmethod
     def agregar_sede(self, sede):
         pass
