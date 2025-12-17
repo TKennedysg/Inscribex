@@ -1,6 +1,33 @@
-class Jornada:
-    def __init__(self, tipo):
-        self.tipo = tipo  # Matutina, Vespertina, Nocturna
+class Jornada():
+    def __init__(self,hora,modalidad=""):
+        self._hora = hora
+        self._modalidad = modalidad
+
+    def asignar(self):
+        print("Se ha asignado la jornada")
+   
+    def modificar(self):
+        print("Jornada se ha modificado")
 
     def mostrar(self):
-        print(f"Jornada: {self.tipo}")
+        print("-----Modalidades-----")
+        print("Matutina")
+        print("Vespertina")
+        print("Nocturna")
+   
+    def consultar(self):
+        print(f"Modalidad: {self._modalidad}")
+
+        if self._hora >=7 and self._hora <=11:
+            print("jornada matutina")
+        elif self._hora >=12 and self._hora <=17:
+            print("Jornada vespertina")
+        elif self._hora >=18 and self._hora <=22:
+            print("Jornada nocturna")
+        else:
+            print("la hora no perteneces a ninguna jornada")
+
+
+
+J1 = Jornada(20,"virtual")
+J1.consultar()
