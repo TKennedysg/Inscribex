@@ -2,7 +2,7 @@
 class ProxyExamen:
     def __init__(self, examen_real, rol_usuario):
         self._examen_real = examen_real
-        self._rol_usuario = rol_usuario  # docente, estudiante
+        self._rol_usuario = rol_usuario
 
     def realizar_examen(self):
         self._examen_real.realizar_examen()
