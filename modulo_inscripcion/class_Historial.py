@@ -1,6 +1,7 @@
 from datetime import datetime
+from Interfaces import IObservador
 
-class Historial:
+class Historial(IObservador):
     def __init__(self, aspirante, fecha_actualizada=None, estado="creado"):
         # Atributos Privados
         self.__aspirante = aspirante
@@ -8,8 +9,10 @@ class Historial:
         self.__estado = estado
         self.__eventos = []  # Lista para mantener múltiples eventos
         
+        # Llamamos al método interno
         self.__registrar_historial() 
         
+    # --- MÉTODO RECUPERADO QUE FALTABA ---
     def __registrar_historial(self):
         """Registro automático al crear el historial"""
         evento = {
@@ -21,6 +24,14 @@ class Historial:
         self.__eventos.append(evento)
         print(f"📝 Historial creado para {self.__aspirante} - {self.__fecha_actualizada} - Estado: {self.__estado}")
     
+    # --- IMPLEMENTACIÓN DEL PATRÓN OBSERVER ---
+    def actualizar(self, sujeto, evento_detalle):
+        """Método que recibe la notificación automática"""
+        nuevo_estado = sujeto.estado
+        print(f"👀 OBSERVADOR NOTIFICADO: El historial detectó cambio -> {evento_detalle}")
+        # Registramos el evento automáticamente
+        self.agregar_evento("actualizacion_automatica", nuevo_estado, evento_detalle)
+
     def agregar_evento(self, accion, nuevo_estado=None, observacion=""):
         """Agrega un nuevo evento al historial"""
         fecha_evento = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -53,50 +64,4 @@ class Historial:
             print("-" * 30)
     
     def consultar_estado_actual(self):
-        """Consulta solo el estado actual"""
         return f"🔄 Aspirante: {self.__aspirante} | Estado: {self.__estado} | Última actualización: {self.__fecha_actualizada}"
-    
-    def obtener_ultimo_evento(self):
-        """Obtiene el último evento registrado"""
-        if self.__eventos:
-            return self.__eventos[-1]
-        return None
-    
-    def limpiar_historial(self):
-        """Limpia el historial (con confirmación)"""
-        confirmacion = input("¿Está seguro de limpiar el historial? (s/n): ")
-        if confirmacion.lower() == 's':
-            self.__aspirante = ""
-            self.__fecha_actualizada = ""
-            self.__estado = ""
-            self.__eventos = []
-            print("🗑️ Historial limpiado completamente.")
-        else:
-            print("❌ Operación cancelada.")
-    
-    def exportar_historial(self):
-        """Exporta el historial en formato legible"""
-        if not self.__eventos:
-            return "No hay eventos en el historial"
-        
-        reporte = f"REPORTE DE HISTORIAL - Aspirante: {self.__aspirante}\n"
-        reporte += "=" * 50 + "\n"
-        
-        for evento in self.__eventos:
-            reporte += f"Fecha: {evento['fecha']} | Acción: {evento['accion']} | Estado: {evento['estado']}\n"
-            if evento.get('observacion'):
-                reporte += f"Observación: {evento['observacion']}\n"
-            reporte += "-" * 30 + "\n"
-        
-        return reporte
-
-# Ejemplo de prueba
-if __name__ == "__main__":
-    hist = Historial("Ana Gomez", estado="Activo")
-    hist.agregar_evento("inscripcion", "inscrito", "Documentos entregados")
-    hist.agregar_evento("validacion", "validado", "Documentos aprobados")
-    hist.agregar_evento("pago", "completado", "Matrícula pagada")
-    
-    hist.consultar_historial()
-    print(hist.consultar_estado_actual())
-    print("\nÚltimo evento:", hist.obtener_ultimo_evento())
