@@ -70,7 +70,7 @@ class Registro:
 
 # Ejemplo de prueba
 if __name__ == "__main__":
-    from Aspirante import Aspirante
+    from Aspirante_versioncompleta import Aspirante
     
     aspirante = Aspirante("Ana Lopez", "1309768932", "ana.lopez@gmail.com", "0987654321", "Av. Los Eucaliptos 123")
     registro = Registro("105", aspirante, "en proceso")
