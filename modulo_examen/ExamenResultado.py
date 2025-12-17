@@ -1,4 +1,4 @@
-class examenResultado:
+class ExamenResultado:
     def __init__(self, calificacion, estado, fecha):
         self.__calificacion = calificacion
         self.__estado = estado
@@ -22,7 +22,7 @@ class examenResultado:
     def obtenerreporte(self):
         reporte = f"Fecha: {self._fecha}, Calificación: {self.__calificacion}, Estado: {self.__estado}"
         return reporte
-resex = examenResultado(600, "Pendiente", "2025-10-15")
+resex = ExamenResultado(600, "Pendiente", "2025-10-15")
 resex.actualizarEstado()
 print(resex.obtenerreporte())
 resex.validarResultado()
