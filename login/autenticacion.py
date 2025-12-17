@@ -6,10 +6,10 @@ class Autenticacion:
     def registrar_usuario(self, usuario):
         self.usuarios_registrados[usuario.correo] = usuario
 
-    def login(self, correo, contrasena):
+    def login(self, correo, contraseña):
         if correo in self.usuarios_registrados:
             usuario = self.usuarios_registrados[correo]
-            if usuario.contrasena == contrasena:
+            if usuario.contraseña == contraseña:
                 print("\n✔ LOGIN EXITOSO ✔")
                 print(f"Bienvenido, {usuario.nombre}")
                 return usuario

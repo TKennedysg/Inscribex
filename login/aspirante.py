@@ -1,42 +1,60 @@
 # usuarios.py
 from abc import ABC, abstractmethod
-
+from observer.subject import Subject    
 class Usuario(ABC):
-    def __init__(self, nombre, cedula, correo, contrasena):
+    def __init__(self, nombre, cedula, correo,contraseña):
         self.nombre = nombre
         self.cedula = cedula 
         self.correo = correo
-        self.contrasena = contrasena
+        self.contraseña = contraseña
     
     @abstractmethod
     def Registrarse(self):
         pass
 
-
-class Aspirante(Usuario):
-    def __init__(self, nombre, cedula, correo, contrasena, telefono, direccion):
-        super().__init__(nombre, cedula, correo, contrasena)
+class Aspirante(Usuario, Subject):   # Ahora es Subject
+    def __init__(self, nombre, cedula, correo,contraseña, telefono, direccion, estado):
+        super().__init__(nombre, cedula, correo,contraseña)
         self.telefono = telefono
         self.direccion = direccion
+        self._observers = []           # Lista de observadores
+        self.estado = estado
 
+
+    # MÉTODOS DEL SUBJECT
+    def agregar_observer(self, observer): 
+        self._observers.append(observer)
+
+    def quitar_observer(self, observer):
+        self._observers.remove(observer)
+
+    def notificar(self, mensaje):
+        for observer in self._observers:
+            observer.actualizar(mensaje)
+
+    #MÉTODOS DEL USUARIO 
+   
     def Registrarse(self):
-        print("Aspirante Registrado")
-        print("Nombre: ", self.nombre)
-        print("Cedula: ", self.cedula)
-        print("Correo: ", self.correo)
-        print("Telefono: ", self.telefono)
-        print("Direccion: ", self.direccion)
+        self.estado = "Registrado"
+        self.notificar(f"El aspirante {self.nombre} se ha registrado")
+        print("Nombre:", self.nombre)
+        print("Cedula:", self.cedula)
+        print("Correo:", self.correo)
+
+
+    #MÉTODOS ADICIONALES 
 
     def postularse(self):
-        print(f"{self.nombre} se ha postulado correctamente.")
+        self.estado = "Postulado"
+        self.notificar(f"El aspirante {self.nombre} se ha postulado")
 
     def consultarEstado(self):
-        print(f"El estado del aspirante {self.nombre} está en revisión.")
+        print(f"Estado actual: {self.estado}")
 
 
 class Administrador(Usuario):
-    def __init__(self, nombre, cedula, correo, contrasena):
-        super().__init__(nombre, cedula, correo, contrasena)
+    def __init__(self, nombre, cedula, correo, contraseña):
+        super().__init__(nombre, cedula, correo, contraseña)
 
     def Registrarse(self):
         print("Administrador Registrado")
