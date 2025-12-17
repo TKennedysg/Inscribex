@@ -10,7 +10,7 @@ proxy_examen = ProxyExamen(examen, "estudiante")
 proxy_examen.realizar_examen()
 proxy_examen.calificar_examen(700)  # No permitido
 
-proxy_docente = ProxyExamen(examen, "docente")
+proxy_docente = ProxyExamen(examen, "estudiante")
 proxy_docente.calificar_examen(700)
 proxy_docente.generar_reporte()
 
