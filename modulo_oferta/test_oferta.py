@@ -1,42 +1,31 @@
-from interfaces.Universidad import Universidad
-from Servicios_Uni.UniversidadService import UniversidadService
-from Sede import Sede
-from Carrera import Carrera
-from Jornada import Jornada
+# test_oferta.py
+from Jornadas import Jornada
+from factories import CarreraFactory, SedeFactory
+from Universidad import Universidad
 from OfertaAcademica import OfertaAcademica
-from factories.CarreraFactory import CarreraFactory
 
+# 1️⃣ Universidad
+uni = Universidad("Universidad Laica Eloy Alfaro de Manabí")
 
-factory = CarreraFactory()
-service = UniversidadService()
-
-u = Universidad("Universidad Laica Eloy Alfaro de Manabí")
-
-
+# 2️⃣ Jornadas
 j1 = Jornada("Matutina")
 j2 = Jornada("Vespertina")
+uni.agregar_jornada(j1)
+uni.agregar_jornada(j2)
 
-u.agregar_jornada(j1)
-u.agregar_jornada(j2)
+# 3️⃣ Sedes usando Factory
+s1 = SedeFactory.crear_sede("matriz", "Matriz Manta", "Av. Principal 123", 500)
+s2 = SedeFactory.crear_sede("extension", "Extensión Chone", "Calle Secundaria 45", 200)
+uni.agregar_sede(s1)
+uni.agregar_sede(s2)
 
-s1 = Sede("Matriz Manta", "Av. Universitaria", 500)
-s2 = Sede("Extensión Chone", "Calle Bolívar", 300)
+# 4️⃣ Carreras usando Factory
+c1 = CarreraFactory.crear_carrera("ingenieria", "Ingeniería de Software", 5, 50, j1)
+c2 = CarreraFactory.crear_carrera("salud", "Medicina", 6, 40, j2)
+uni.agregar_carrera(c1)
+uni.agregar_carrera(c2)
 
-u.agregar_sede(s1)
-u.agregar_sede(s2)
-
-c1 = factory.crear_carrera(
-    "ingenieria",
-    "Ingeniería de Software",
-    4,
-    120,
-    j1
-)
-c2 = Carrera("Medicina", 6, 80, j2)
-
-u.agregar_carrera(c1)
-u.agregar_carrera(c2)
-
+# 5️⃣ Oferta Académica
 oferta = OfertaAcademica()
 oferta.agregar_carrera(c1)
 oferta.agregar_carrera(c2)
@@ -45,7 +34,8 @@ oferta.agregar_sede(s2)
 oferta.agregar_jornada(j1)
 oferta.agregar_jornada(j2)
 
-u.asignar_oferta(oferta)
-
-service.mostrar_universidad(u)
 oferta.publicar()
+uni.asignar_oferta_academica(oferta)
+
+# 6️⃣ Mostrar Universidad
+uni.mostrar_info()
