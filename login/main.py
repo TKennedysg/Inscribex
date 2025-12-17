@@ -6,13 +6,13 @@ from observer.notificaciones import Notificacion
 auth = Autenticacion()
 
 # Crear usuarios
-asp1 = Aspirante("Juan Perez", "1309768932", "juan@gmail.com", "1234", 
-                 "0987654321", "Av. Los Eucaliptos 123",None)
-
+asp1 = Aspirante("Juan Perez", "1309768932", "juan@gmail.com", "1234","0987654321", "Av. Los Eucaliptos 123",None)
+asp2 = Aspirante("Maria Lopez", "1309768933", "maria@gmail.com","123","0987654321","La epoca")
 admin1 = Administrador("Santiago", "1234567899", "santy@gmail.com", "admin123")
 
 # Registrar usuarios en el sistema
 auth.registrar_usuario(asp1)
+auth.registrar_usuario(asp2)    
 auth.registrar_usuario(admin1)
 
 # --------- LOGIN ---------
