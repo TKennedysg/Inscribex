@@ -16,13 +16,7 @@ class Aspirante(Usuario):
         self.telefono=telefono
         self.direccion=direccion
 
-    def Registrarse(self):
-        print("Aspirante Registrado")
-        print("Nombre: ",self.nombre)
-        print("Cedula: ",self.cedula)
-        print("Correo: ",self.correo)
-        print("Telefono: ",self.telefono)
-        print("Direccion: ",self.direccion)
+
 
     def postularse(self):
         print("Aspirante Postulado")
@@ -53,4 +47,4 @@ asp1.postularse()
 asp1.consultarEstado()
 
 print("\n----ADMINISTRADOR----")
-admin1.Registrarse()
+admin1.Registrarse() 

@@ -1,6 +1,5 @@
 class Historial:
     def __init__ (self, aspirante, fecha_actualizada, estado):
-        # Atributos Privados
         self.__aspirante = aspirante
         self.__fecha_actualizada = fecha_actualizada
         self.__estado = estado

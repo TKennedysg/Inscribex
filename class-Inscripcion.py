@@ -22,3 +22,4 @@ Inscripcion1 = Inscripcion("tyrone","26/10/2025","123",Autenticacion1,)
 Inscripcion1.ingresar_datos()
 Inscripcion1.registrarse()
 
+
