@@ -1,16 +1,5 @@
-# usuarios.py
-from abc import ABC, abstractmethod
+from usuario import Usuario
 from observer.subject import Subject    
-class Usuario(ABC):
-    def __init__(self, nombre, cedula, correo,contraseña):
-        self.nombre = nombre
-        self.cedula = cedula 
-        self.correo = correo
-        self.contraseña = contraseña
-    
-    @abstractmethod
-    def Registrarse(self):
-        pass
 
 class Aspirante(Usuario, Subject):   # Ahora es Subject
     def __init__(self, nombre, cedula, correo,contraseña, telefono, direccion, estado):
@@ -50,14 +39,3 @@ class Aspirante(Usuario, Subject):   # Ahora es Subject
 
     def consultarEstado(self):
         print(f"Estado actual: {self.estado}")
-
-
-class Administrador(Usuario):
-    def __init__(self, nombre, cedula, correo, contraseña):
-        super().__init__(nombre, cedula, correo, contraseña)
-
-    def Registrarse(self):
-        print("Administrador Registrado")
-        print(f"Nombre: {self.nombre}")
-        print(f"Cédula: {self.cedula}")
-        print(f"Correo: {self.correo}")
