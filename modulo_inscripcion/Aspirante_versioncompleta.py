@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from abc import ABC, abstractmethod
 from datetime import datetime
 from database import ConexionDB  # <--- IMPORTANTE: Importamos la conexión

@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import Error
 
 class ConexionDB:
-    def __init__(self, host="localhost", database="SISTEMA SIPU", user="postgres", password="admin123"):
+    def __init__(self, host="localhost", database="SISTEMA SIPU", user="postgres", password="adonism2006"):
         # CAMBIA 'TU_CONTRASEÑA_AQUI' POR LA TUYA DE PGADMIN
         self.host = host
         self.database = database
