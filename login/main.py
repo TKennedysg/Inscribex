@@ -7,6 +7,7 @@ from observer.notificaciones import Notificacion
 auth = Autenticacion()
 
 # Crear usuarios
+#datos aspirante
 
 print("=== REGISTRO DE ASPIRANTE ===")
 
@@ -19,6 +20,40 @@ direccion = input("Ingrese dirección: ")
 estado = "Registrado"
 
 aspirante = Aspirante(nombre, cedula, correo, contraseña , telefono, direccion, estado)
+
+#datos personales
+nacionalidad = input("Ingrese nacionalidad: ")
+fecha_nacimiento = input("Ingrese fecha de nacimiento (YYYY-MM-DD): ")
+estado_civil = input("Ingrese estado civil: ")
+sexo = input("Ingrese sexo: ")
+autoidentificacion = input("Ingrese autoidentificación: ")
+discapacidad = input("¿Tiene alguna discapacidad? (Sí/No): ")    
+pais = input("Ingrese país: ")
+provincia = input("Ingrese provincia: ")
+ciudad = input("Ingrese ciudad: ")
+
+#datos vivienda 
+barrio = input("Ingrese barrio: ")
+calle_principal = input("Ingrese calle principal: ")
+calle_secundaria = input("Ingrese calle secundaria: ")
+numero_domicilio = input("Ingrese número de domicilio: ")
+tipo_vivienda = input("Ingrese tipo de vivienda: ")
+agua_potable = input("¿Tiene agua potable? (Sí/No): ")
+energia_electrica = input("¿Tiene energía eléctrica? (Sí/No): ")
+alcantarillado = input("¿Tiene alcantarillado? (Sí/No): ")
+recoleccion_basura = input("¿Tiene recolección de basura? (Sí/No): ")
+internet = input("¿Tiene internet? (Sí/No): ")
+dispositivos_tecnologicos = input("¿Tiene dispositivos tecnológicos? (Sí/No): ")
+    
+#datos academicos
+titulo_homologado = input("Ingrese título homologado: ")
+unidad_educatica = input("Ingrese unidad educática: ")
+tipo_unidad_educativa = input("Ingrese tipo de unidad educativa: ")
+calificacion = input("Ingrese calificación: ")
+cuadro_honor = input("¿Tiene cuadro de honor? (Sí/No): ")
+titulo_tercer_nivel = input("Ingrese título de tercer nivel: ")
+titulo_cuarto_nivel = input("Ingrese título de cuarto nivel: ")
+fecha_registro_nacional = input("Ingrese fecha de registro nacional (YYYY-MM-DD): ")
 
 # Registrar usuarios en el sistema
 auth.registrar_usuario(aspirante)
