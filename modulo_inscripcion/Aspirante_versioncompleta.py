@@ -125,8 +125,8 @@ if __name__ == "__main__":
     
     # Crea un aspirante nuevo (Cambia la cédula si lo ejecutas varias veces)
     aspirante_prueba = (builder
-        .con_datos_personales("Juan Bustamante", "1354565585", "juan.bd@email.com")
-        .con_contacto("0992995912", "Calle SQL 123")
+        .con_datos_personales("Juan Busta", "1354533333", "juan.bd@ggemail.com")
+        .con_contacto("0992995552", "Calle SQL 2223")
         .build()
     )
     
