@@ -18,3 +18,4 @@ class SedeFactory:
             return Sede(nombre, direccion, cupos_totales)
         else:
             raise ValueError("Tipo de sede no válido")
+        

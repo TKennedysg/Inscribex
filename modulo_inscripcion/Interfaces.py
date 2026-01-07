@@ -6,3 +6,4 @@ class IObservador(ABC):
     def actualizar(self, sujeto, evento_detalle):
         """Método que se ejecuta cuando el sujeto cambia"""
         pass
+
