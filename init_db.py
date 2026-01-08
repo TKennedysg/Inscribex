@@ -131,6 +131,7 @@ def crear_tablas():
             id SERIAL PRIMARY KEY,
             nombre_sede VARCHAR(100) NOT NULL UNIQUE,
             direccion TEXT
+        )
         """
     )
 
