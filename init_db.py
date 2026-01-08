@@ -108,10 +108,18 @@ def crear_tablas():
         # 10. PERÍODOS ACADÉMICOS
         """
         CREATE TABLE IF NOT EXISTS periodos (
-        id SERIAL PRIMARY KEY,
-        anio INTEGER NOT NULL,
-        periodo VARCHAR(10) NOT NULL,
-        UNIQUE (anio, periodo)
+            id SERIAL PRIMARY KEY,
+            anio INTEGER NOT NULL,
+            periodo VARCHAR(10) NOT NULL,
+            UNIQUE (anio, periodo)
+        )
+        """,
+        # 11. SEDE
+        """
+        CREATE TABLE IF NOT EXISTS sedes (
+            id SERIAL PRIMARY KEY,
+            nombre_sede VARCHAR(100) NOT NULL UNIQUE,
+            direccion TEXT,
         )
         """
     )
