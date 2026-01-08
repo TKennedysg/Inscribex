@@ -27,7 +27,6 @@ def crear_servicios():
     alcantarillado = datos.get('alcantarillado')
     recoleccion_basura = datos.get('recoleccion_basura')
     internet = datos.get('internet')
-    dispositivos_tecnologicos = datos.get('dispositivos_tecnologicos')
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -40,9 +39,8 @@ def crear_servicios():
             energia_electrica,
             alcantarillado,
             recoleccion_basura,
-            internet,
-            dispositivos_tecnologicos
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING *
+            internet
+        ) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *
         ''',
         (
             usuario_id,
@@ -51,7 +49,6 @@ def crear_servicios():
             alcantarillado,
             recoleccion_basura,
             internet,
-            dispositivos_tecnologicos
         )
     )
     
@@ -70,7 +67,6 @@ def actualizar_servicios(id):
     alcantarillado = datos.get('alcantarillado')
     recoleccion_basura = datos.get('recoleccion_basura')
     internet = datos.get('internet')
-    dispositivos_tecnologicos = datos.get('dispositivos_tecnologicos')
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -83,7 +79,6 @@ def actualizar_servicios(id):
             alcantarillado = %s,
             recoleccion_basura = %s,
             internet = %s,
-            dispositivos_tecnologicos = %s
         WHERE id = %s 
         RETURNING *
         ''',
@@ -93,7 +88,6 @@ def actualizar_servicios(id):
             alcantarillado,
             recoleccion_basura,
             internet,
-            dispositivos_tecnologicos,
             id
         )
     )
