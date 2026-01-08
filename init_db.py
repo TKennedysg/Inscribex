@@ -82,6 +82,15 @@ def crear_tablas():
             id SERIAL PRIMARY KEY,
             nombre_jornada VARCHAR(50) NOT NULL UNIQUE
         )
+        """,
+        # 8. PERÍODOS ACADÉMICOS
+        """
+        CREATE TABLE IF NOT EXISTS periodos (
+        id SERIAL PRIMARY KEY,
+        anio INTEGER NOT NULL,
+        periodo VARCHAR(10) NOT NULL,
+        UNIQUE (anio, periodo)
+        )
         """
     )
 
