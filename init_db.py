@@ -75,6 +75,13 @@ def crear_tablas():
             titulo_cuarto_nivel VARCHAR(150) NOT NULL,
             fecha_registro_nacional DATE NOT NULL
         )
+        """,
+        # 7. JORNADAS ACADEMICAS
+        """
+        CREATE TABLE IF NOT EXISTS jornadas_academicas (
+            id SERIAL PRIMARY KEY,
+            nombre_jornada VARCHAR(50) NOT NULL UNIQUE
+        )
         """
     )
 
@@ -102,6 +109,7 @@ def crear_tablas():
     finally:
         if conn is not None:
             conn.close()
+    
 
 if __name__ == '__main__':
     crear_tablas()
