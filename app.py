@@ -11,6 +11,7 @@ from routes.datos_duracion_carrera import duracion_carreras_bp
 from routes.datos_modalidad import modalidad_bp
 from routes.datos_sede import sedes_bp
 from routes.datos_area import areas_bp
+from routes.datos_notas_postulacion import notas_postulacion_bp
 
 app = Flask(__name__)
 CORS(app)
@@ -26,6 +27,8 @@ app.register_blueprint(modalidad_bp, url_prefix="/api/python")
 app.register_blueprint(periodos_bp, url_prefix="/api/python")
 app.register_blueprint(sedes_bp, url_prefix="/api/python")
 app.register_blueprint(areas_bp, url_prefix="/api/python")
+app.register_blueprint(notas_postulacion_bp, url_prefix="/api/python")
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=4000)

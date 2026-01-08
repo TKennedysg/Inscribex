@@ -147,8 +147,7 @@ def crear_tablas():
             usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
             carrera_id INTEGER NOT NULL REFERENCES datos_carreras(id) ON DELETE CASCADE,
             periodo_id INTEGER NOT NULL REFERENCES periodos(id) ON DELETE CASCADE,
-            nota DECIMAL(5,2) NOT NULL CHECK (nota >= 0 AND nota <= 100),
-            observacion VARCHAR(255),
+            nota DECIMAL(5,2) NOT NULL CHECK (nota >= 0 AND nota <= 1000),
             fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             UNIQUE (usuario_id, carrera_id, periodo_id)
         )
