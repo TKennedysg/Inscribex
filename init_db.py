@@ -133,12 +133,28 @@ def crear_tablas():
             direccion TEXT
         )
         """,
-        # 12. AREA
+        # 13.NOTAS POSTULACION
         """
-        CREATE TABLE IF NOT EXISTS areas (
+        CREATE TABLE IF NOT EXISTS notas_postulacion (
             id SERIAL PRIMARY KEY,
-            nombre_area VARCHAR(100) NOT NULL UNIQUE
-        )        
+
+            usuario_id INTEGER NOT NULL
+                REFERENCES usuarios(id) ON DELETE CASCADE,
+
+            carrera_id INTEGER NOT NULL
+                REFERENCES datos_carreras(id) ON DELETE CASCADE,
+
+            periodo_id INTEGER NOT NULL
+                REFERENCES periodos(id) ON DELETE CASCADE,
+
+            nota DECIMAL(5,2) NOT NULL CHECK (nota >= 0 AND nota <= 100),
+
+            observacion VARCHAR(255),
+
+            fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+            UNIQUE (usuario_id, carrera_id, periodo_id)
+            )
         """
     )
 
