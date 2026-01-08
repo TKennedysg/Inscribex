@@ -61,6 +61,7 @@ def crear_tablas():
             internet VARCHAR(5) NOT NULL
         )
         """,
+        
         # 5. DATOS ACADÉMICOS
         """
         CREATE TABLE IF NOT EXISTS datos_academicos (
@@ -76,7 +77,26 @@ def crear_tablas():
             fecha_registro_nacional DATE NOT NULL
         )
         """,
-        # 6. DATOS CARRERAS
+
+
+         # 6. DATOS MODALIDAD
+        """
+        CREATE TABLE IF NOT EXISTS modalidad (
+            id SERIAL PRIMARY KEY,
+            nombre VARCHAR(100) NOT NULL UNIQUE 
+        )
+        """,
+        
+        # 7. DATOS DURACIÓN CARRERAS
+        """
+        CREATE TABLE IF NOT EXISTS duracion_carreras (
+            id SERIAL PRIMARY KEY,
+            nombre_duracion VARCHAR(10) NOT NULL UNIQUE
+        )
+        """,
+        
+
+        # 8. DATOS CARRERAS
         """
         CREATE TABLE IF NOT EXISTS datos_carreras (
             id SERIAL PRIMARY KEY,
@@ -84,19 +104,8 @@ def crear_tablas():
             id_modalidad INTEGER UNIQUE NOT NULL REFERENCES modalidad(id) ON DELETE CASCADE,
             id_duracion_carrera INTEGER UNIQUE NOT NULL REFERENCES duracion_carreras(id) ON DELETE CASCADE
         )
-        """,# 7. DATOS MODALIDAD
-        """
-        CREATE TABLE IF NOT EXISTS modalidad (
-            id SERIAL PRIMARY KEY,
-            nombre VARCHAR(100) NOT NULL UNIQUE 
-        )
-        """,# 8. DATOS DURACIÓN CARRERAS
-        """
-        CREATE TABLE IF NOT EXISTS duracion_carreras (
-            id SERIAL PRIMARY KEY,
-            nombre_duracion VARCHAR(10) NOT NULL UNIQUE
-        )
         """,
+        
 
         # 9. JORNADAS ACADEMICAS
         """
@@ -105,6 +114,8 @@ def crear_tablas():
             nombre_jornada VARCHAR(50) NOT NULL UNIQUE
         )
         """,
+
+        
         # 10. PERÍODOS ACADÉMICOS
         """
         CREATE TABLE IF NOT EXISTS periodos (
@@ -119,8 +130,7 @@ def crear_tablas():
         CREATE TABLE IF NOT EXISTS sedes (
             id SERIAL PRIMARY KEY,
             nombre_sede VARCHAR(100) NOT NULL UNIQUE,
-            direccion TEXT,
-        )
+            direccion TEXT
         """
     )
 
