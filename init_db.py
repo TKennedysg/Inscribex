@@ -132,6 +132,13 @@ def crear_tablas():
             nombre_sede VARCHAR(100) NOT NULL UNIQUE,
             direccion TEXT
         )
+        """,
+        # 12. AREA
+        """
+        CREATE TABLE IF NOT EXISTS areas (
+            id SERIAL PRIMARY KEY,
+            nombre_area VARCHAR(100) NOT NULL UNIQUE
+        )        
         """
     )
 
