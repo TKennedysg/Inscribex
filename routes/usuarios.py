@@ -20,14 +20,16 @@ def crear_usuario():
     nombre = datos.get('nombre')
     apellido = datos.get('apellido')
     cedula = datos.get('cedula')
-    contrasena = datos.get('contrasena') # Recuerda: ¡luego hay que encriptarla!
+    contrasena = cedula # Recuerda: ¡luego hay que encriptarla!
+    rol = datos.get('rol', 'ASPIRANTE')  # Valor por defecto 'ASPIRANTE'
+    estado = datos.get('estado', 'Registrado')  # Valor por defecto 'Registrado'    
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
     
     cur.execute(
-        'INSERT INTO usuarios (nombre, apellido, cedula, contrasena) VALUES (%s, %s, %s, %s) RETURNING *',
-        (nombre, apellido, cedula, contrasena)
+        'INSERT INTO usuarios (nombre, apellido, cedula, contrasena, rol, estado) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *',
+        (nombre, apellido, cedula, contrasena, rol, estado)
     )
     
     nuevo_usuario = cur.fetchone()
