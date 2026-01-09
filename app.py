@@ -13,6 +13,7 @@ from routes.datos_area import areas_bp
 from routes.datos_notas_postulacion import notas_postulacion_bp
 from routes.datos_jornadas_academicas import jornadas_academicas_bp
 from routes.datos_demograficos import datos_demograficos_bp
+from routes.datos_verificacion_registro_nacional import verificacion_bp
 from routes.login import login_bp
 from init_db import Usuario
 import os
@@ -41,7 +42,7 @@ app.register_blueprint(notas_postulacion_bp, url_prefix="/api/python")
 app.register_blueprint(jornadas_academicas_bp, url_prefix="/api/python")
 app.register_blueprint(datos_demograficos_bp, url_prefix="/api/python")
 app.register_blueprint(login_bp, url_prefix="/api/python")
-
+app.register_blueprint(verificacion_bp, url_prefix="/api/python")
 
 
 Usuario.crear_tablas()
