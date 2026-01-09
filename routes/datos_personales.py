@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from dbconexion import get_db_connection
 from psycopg2.extras import RealDictCursor
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 datos_personales_bp = Blueprint('usuarios', __name__)
 
@@ -17,6 +18,50 @@ def obtener_datos_demograficos():
         return jsonify(resultado)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+# obterner usuario por id
+
+@datos_personales_bp.route('/usuarios/<int:id>', methods=['GET'])
+def obtener_usuario(id):
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur.execute('SELECT * FROM usuarios WHERE id = %s', (id,))
+    resultado = cur.fetchone()
+    cur.close()
+    conn.close()
+    return jsonify(resultado)
+
+
+# obtener informacion mediante jwtoken
+@datos_personales_bp.route('/perfil', methods=['GET'])
+@jwt_required()
+def obtener_mi_perfil():
+    try:
+        # Extrae el ID que guardamos en el login (identity)
+        usuario_id = get_jwt_identity() 
+        
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        
+        # Aprovechamos para traer sus datos académicos con un JOIN
+        cur.execute('SELECT * FROM usuarios WHERE id = %s', (usuario_id,))
+        
+        usuario = cur.fetchone()
+        
+        cur.close()
+        conn.close()
+
+        if usuario:
+            usuario.pop('contrasena', None)
+            return jsonify(usuario), 200
+        else:
+            return jsonify({"mensaje": "Usuario no encontrado"}), 404
+
+    except Exception as e:
+        print(f"Error en perfil: {e}")
+        return jsonify({"error": str(e)}), 500
+ 
+
 
 # --- 2. CREAR DATOS DEMOGRÁFICOS (POST) ---
 @datos_personales_bp.route('/usuarios', methods=['POST'])
@@ -25,10 +70,9 @@ def crear_datos_personales():
     nombre = datos.get('nombre')
     apellido = datos.get('apellido')
     cedula = datos.get('cedula')
-    contrasena = datos.get('contrasena') 
+    contrasena = cedula  # Por defecto, la contraseña es la cédula 
     telefono = datos.get('telefono') 
     direccion = datos.get('direccion')
-    estado = datos.get('estado') 
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -36,12 +80,12 @@ def crear_datos_personales():
     # SQL Actualizado con los nuevos campos
     sql = """
         INSERT INTO usuarios 
-            (nombre, apellido, cedula, contrasena, telefono, direccion, estado) 
-            VALUES (%s, %s, %s, %s, %s, %s, %s) 
+            (nombre, apellido, cedula, contrasena, telefono, direccion) 
+            VALUES (%s, %s, %s, %s, %s, %s) 
             RETURNING *
         """
         
-    cur.execute(sql, (nombre, apellido, cedula, contrasena, telefono, direccion, estado))
+    cur.execute(sql, (nombre, apellido, cedula, contrasena, telefono, direccion))
         
     nuevo_usuario = cur.fetchone()
     conn.commit()
