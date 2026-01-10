@@ -28,8 +28,6 @@ class Usuario:
                     apellido VARCHAR(100) NOT NULL,
                     cedula VARCHAR(20) UNIQUE NOT NULL,
                     contrasena VARCHAR(255) NOT NULL,
-                    telefono VARCHAR(20) NOT NULL,
-                    direccion VARCHAR(255) NOT NULL,
                     rol VARCHAR(20) DEFAULT 'ASPIRANTE',
                     estado VARCHAR(20) DEFAULT 'Registrado',
                     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
