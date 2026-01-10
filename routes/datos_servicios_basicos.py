@@ -201,6 +201,60 @@ def obtener_servicios_basicos():
             return jsonify({"mensaje": "Servicios básicos no encontrados"}), 404
 
     except Exception as e:
-        print(f"Error en perfil: {e}")
+        print(f"Error en datos servicios basicos: {e}")
         return jsonify({"error": str(e)}), 500
  
+#CREAR SERVICIOS BASICOS
+@servicios_bp.route('/servicios-basicos/nuevo', methods=['POST'])
+@jwt_required()
+def crear_servicios_basicos():
+    # 1. Obtenemos el ID del usuario desde el token
+    usuario_id = get_jwt_identity()
+    datos = request.json
+
+    # 2. Validación de campos requeridos (según tu esquema NOT NULL)
+    campos_requeridos = ['agua_potable', 'energia_electrica', 'alcantarillado', 'recoleccion_basura', 'internet']
+    for campo in campos_requeridos:
+        if campo not in datos or datos[campo] is None:
+            return jsonify({"mensaje": f"El campo {campo} es obligatorio"}), 400
+
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    try:
+        # 3. Insertar datos
+        # Nota: Usamos usuario_id como la columna de referencia
+        query = """
+            INSERT INTO servicios_basicos (usuario_id, agua_potable, energia_electrica, alcantarillado, recoleccion_basura, internet)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            RETURNING *
+        """
+        valores = (
+            usuario_id, 
+            datos['agua_potable'], 
+            datos['energia_electrica'], 
+            datos['alcantarillado'], 
+            datos['recoleccion_basura'], 
+            datos['internet']
+        )
+        
+        cur.execute(query, valores)
+        nuevos_servicios = cur.fetchone()
+        conn.commit()
+
+        return jsonify({
+            "mensaje": "Servicios básicos registrados exitosamente",
+            "servicios": nuevos_servicios
+        }), 201
+
+    except Exception as e:
+        conn.rollback()
+        # Manejo específico para el caso de que ya existan datos (por el UNIQUE usuario_id)
+        if "already exists" in str(e).lower() or "duplicado" in str(e).lower():
+            return jsonify({"mensaje": "Los servicios básicos de este usuario ya están registrados. Use PUT para actualizar."}), 409
+        
+        print(f"Error al crear servicios básicos: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
