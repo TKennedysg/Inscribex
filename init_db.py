@@ -203,6 +203,24 @@ class Usuario:
                 );
             """)
 
+            # 15. Inscripcion 
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS datos_inscripcion (
+                    id SERIAL PRIMARY KEY,
+                    usuario_id INTEGER NOT NULL
+                    REFERENCES usuarios(id) ON DELETE CASCADE,
+                    periodo_id INTEGER NOT NULL
+                    REFERENCES periodos(id) ON DELETE CASCADE,
+                    carrera_id INTEGER NOT NULL
+                    REFERENCES datos_carreras(id) ON DELETE CASCADE,
+                    sede_id INTEGER NOT NULL
+                    REFERENCES sedes(id),
+                    numero_intencion INTEGER DEFAULT 1,
+                    fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE (usuario_id, periodo_id)
+                );
+            """)
+
             conn.commit()
             print("Tablas del sistema SIPU creadas correctamente")
 

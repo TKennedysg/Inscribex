@@ -8,3 +8,4 @@ Hi all
 # git add .
 # git commit -m "Descripción breve del cambio"
 # git push origin main#
+# git merge --abort (Sirve para abortar un cambio al momento de que surja un merge type error)
