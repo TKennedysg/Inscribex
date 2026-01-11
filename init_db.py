@@ -114,14 +114,13 @@ class Usuario:
 
             # 8. DATOS CARRERAS (ETAPA: POSTULACIÓN)
             cursor.execute("""
-                CREATE TABLE IF NOT EXISTS datos_carreras (
+                CREATE TABLE IF NOT EXISTS carreras (
                     id SERIAL PRIMARY KEY,
-                    usuario_id INTEGER NOT NULL
-                        REFERENCES usuarios(id) ON DELETE CASCADE,
-                    id_modalidad INTEGER NOT NULL
-                        REFERENCES modalidad(id),
-                    id_duracion_carrera INTEGER NOT NULL
-                        REFERENCES duracion_carreras(id),
+                    nombre_carrera VARCHAR(150) NOT NULL UNIQUE,
+                    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+                    id_modalidad INTEGER NOT NULL REFERENCES modalidad(id),
+                    id_duracion_carrera INTEGER NOT NULL REFERENCES duracion_carreras(id),
+                    id_facultad INTEGER NOT NULL REFERENCES facultades(id),
                     UNIQUE (usuario_id)
                 );
             """)
@@ -187,19 +186,6 @@ class Usuario:
                     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     fecha_verificacion TIMESTAMP,
                     UNIQUE (usuario_id, periodo_id)
-                );
-            """)
-            # 15. POSTULACIÓN
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS postulacion (
-                    id SERIAL PRIMARY KEY,
-                    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-                    periodo_id INTEGER NOT NULL REFERENCES periodos(id) ON DELETE CASCADE,
-                    area_id INTEGER NOT NULL REFERENCESt area(id) ON DELETE CASCADE,
-                    verificado VARCHAR(20) NOT NULL CHECK (verificado IN ('SI', 'NO', 'EN_PROCESO')),
-                    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    fecha_verificacion TIMESTAMP,
-                    UNIQUE (usuario_id, periodo_id, area_id)
                 );
             """)
 
