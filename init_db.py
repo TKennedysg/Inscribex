@@ -114,14 +114,13 @@ class Usuario:
 
             # 8. DATOS CARRERAS (ETAPA: POSTULACIÓN)
             cursor.execute("""
-                CREATE TABLE IF NOT EXISTS datos_carreras (
+                CREATE TABLE IF NOT EXISTS carreras (
                     id SERIAL PRIMARY KEY,
-                    usuario_id INTEGER NOT NULL
-                        REFERENCES usuarios(id) ON DELETE CASCADE,
-                    id_modalidad INTEGER NOT NULL
-                        REFERENCES modalidad(id),
-                    id_duracion_carrera INTEGER NOT NULL
-                        REFERENCES duracion_carreras(id),
+                    nombre_carrera VARCHAR(150) NOT NULL UNIQUE,
+                    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+                    id_modalidad INTEGER NOT NULL REFERENCES modalidad(id),
+                    id_duracion_carrera INTEGER NOT NULL REFERENCES duracion_carreras(id),
+                    id_facultad INTEGER NOT NULL REFERENCES facultades(id),
                     UNIQUE (usuario_id)
                 );
             """)
@@ -189,6 +188,36 @@ class Usuario:
                     UNIQUE (usuario_id, periodo_id)
                 );
             """)
+            
+            # 15. FACULTAD
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS facultades (
+                    id SERIAL PRIMARY KEY,
+                    nombre VARCHAR(150) NOT NULL UNIQUE
+                );
+            """)
+            
+            # 16. TIPO DE CUPO
+            cursor.execute(
+            """
+                CREATE TABLE IF NOT EXISTS tipos_cupo (
+                    id SERIAL PRIMARY KEY,
+                    nombre VARCHAR(100) NOT NULL UNIQUE
+                );
+            """)
+            
+            # 17. OFERTA ACADEMICA
+            cursor.execute(
+            """
+                CREATE TABLE IF NOT EXISTS ofertas_academicas (
+                    id SERIAL PRIMARY KEY,
+                    id_carrera INTEGER NOT NULL REFERENCES carreras(id) ON DELETE CASCADE,
+                    id_jornada INTEGER NOT NULL REFERENCES jornadas(id),
+                    id_tipo_cupo INTEGER NOT NULL REFERENCES tipos_cupo(id),
+                    total_cupos INTEGER NOT NULL CHECK (total_cupos >= 0),
+                    UNIQUE (id_carrera, id_jornada, id_tipo_cupo)
+                );
+            """)    
 
             conn.commit()
             print("Tablas del sistema SIPU creadas correctamente")
