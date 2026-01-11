@@ -31,7 +31,6 @@ def obtener_datos_demograficos():
 @datos_demograficos_bp.route('/datos-demograficos', methods=['POST'])
 def crear_datos_demograficos():
     datos = request.json
-
     usuario_id = datos.get('usuario_id')
     nacionalidad = datos.get('nacionalidad')
     fecha_nacimiento = datos.get('fecha_nacimiento')
@@ -184,11 +183,12 @@ def eliminar_datos_demograficos(id):
 
     return jsonify({"mensaje": f"Datos demográficos con ID {id} eliminados correctamente"}), 200
 
-# ACTUALIZAR MI PERFIL (PUT) 
 
+
+# ACTUALIZAR MI PERFIL (PUT) 
 @datos_demograficos_bp.route('/datos-demograficos/actualizar', methods=['PUT'])
 @jwt_required()
-def actualizar_datos_demograficos():
+def actualizar_datos_demograficos_jwt():
     # 1. Extraemos el ID directamente del TOKEN (Seguridad total)
     usuario_id = get_jwt_identity()
     
@@ -235,7 +235,7 @@ def actualizar_datos_demograficos():
 # obtener informacion mediante jwtoken
 @datos_demograficos_bp.route('/datos-demograficos', methods=['GET'])
 @jwt_required()
-def obtener_datos_demograficos():
+def obtener_datos_demograficos_jwt():
     try:
         # Extrae el ID que guardamos en el login (identity)
         usuario_id = get_jwt_identity() 
@@ -264,7 +264,7 @@ def obtener_datos_demograficos():
 #CREAR DATOS DEMOGRAFICOS
 @datos_demograficos_bp.route('/datos-demograficos/nuevo', methods=['POST'])
 @jwt_required()
-def crear_datos_demograficos():
+def crear_datos_demograficos_jwt():
     # 1. Obtenemos el ID del usuario desde el token
     usuario_id = get_jwt_identity()
     datos = request.json

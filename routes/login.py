@@ -30,7 +30,8 @@ def login():
             "usuario": {
                 "id": usuario['id'],
                 "nombre": usuario['nombre'],
-                "apellido": usuario['apellido']
+                "apellido": usuario['apellido'],
+                "rol": usuario['rol']
             }
         }), 200
     

@@ -13,12 +13,13 @@ from routes.datos_area import areas_bp
 from routes.datos_notas_postulacion import notas_postulacion_bp
 from routes.datos_jornadas_academicas import jornadas_academicas_bp
 from routes.datos_demograficos import datos_demograficos_bp
+from routes.datos_postulacion import postulacion_bp
 from routes.datos_verificacion_registro_nacional import verificacion_bp
 from routes.login import login_bp
 from init_db import Usuario
 import os
 from flask_jwt_extended import JWTManager
-from routes.datos_postulacion import postulacion_bp
+
 
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')

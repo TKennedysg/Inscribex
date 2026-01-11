@@ -188,6 +188,20 @@ class Usuario:
                     UNIQUE (usuario_id, periodo_id)
                 );
             """)
+            # 15. POSTULACIÓN 
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS postulacion (
+                    id SERIAL PRIMARY KEY,
+                    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+                    carreras_id INTEGER NOT NULL REFERENCES datos_carreras(id),
+                    sede_id INTEGER NOT NULL REFERENCES sedes(id),
+                    area_id INTEGER NOT NULL REFERENCES areas(id),
+                    nota_examen INTEGER DEFAULT (FLOOR (300 + RANDOM() * 701)),
+                    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    fecha_verificacion TIMESTAMP,
+                    UNIQUE (usuario_id, carrera_id, sede_id, area_id)
+                );
+            """)
 
             conn.commit()
             print("Tablas del sistema SIPU creadas correctamente")
