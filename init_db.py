@@ -203,7 +203,7 @@ class Usuario:
                 );
             """)
 
-            # 15. Inscripcion 
+            # 17. Inscripcion 
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS datos_inscripcion (
                     id SERIAL PRIMARY KEY,

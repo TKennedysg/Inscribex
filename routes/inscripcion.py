@@ -15,7 +15,7 @@ def obtener_mi_inscripcion():
 
     cur.execute("""
         SELECT *
-        FROM datos_inscripcion
+        FROM inscripcion
         WHERE usuario_id = %s
     """, (usuario_id,))
 
@@ -28,6 +28,7 @@ def obtener_mi_inscripcion():
         return jsonify(inscripcion), 200
     else:
         return jsonify({"mensaje": "El usuario aún no tiene inscripción"}), 404
+
 
 @inscripcion_bp.route('/inscripcion', methods=['POST'])
 @jwt_required()
@@ -48,7 +49,7 @@ def crear_inscripcion():
 
     try:
         cur.execute("""
-            INSERT INTO datos_inscripcion (
+            INSERT INTO inscripcion (
                 usuario_id,
                 periodo_id,
                 carrera_id,
@@ -83,6 +84,7 @@ def crear_inscripcion():
         cur.close()
         conn.close()
 
+
 @inscripcion_bp.route('/inscripcion', methods=['PUT'])
 @jwt_required()
 def actualizar_inscripcion():
@@ -108,7 +110,7 @@ def actualizar_inscripcion():
 
     try:
         query = f"""
-            UPDATE datos_inscripcion
+            UPDATE inscripcion
             SET {', '.join(partes_sql)}
             WHERE usuario_id = %s
             RETURNING *
