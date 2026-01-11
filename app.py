@@ -18,7 +18,7 @@ from routes.login import login_bp
 from init_db import Usuario
 import os
 from flask_jwt_extended import JWTManager
-
+from routes.datos_postulacion import postulacion_bp
 
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
@@ -43,7 +43,7 @@ app.register_blueprint(jornadas_academicas_bp, url_prefix="/api/python")
 app.register_blueprint(datos_demograficos_bp, url_prefix="/api/python")
 app.register_blueprint(login_bp, url_prefix="/api/python")
 app.register_blueprint(verificacion_bp, url_prefix="/api/python")
-
+app.register_blueprint(postulacion_bp, url_prefix="/api/python")    
 
 Usuario.crear_tablas()
 if __name__ == "__main__":

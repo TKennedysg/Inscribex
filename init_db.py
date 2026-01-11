@@ -189,6 +189,19 @@ class Usuario:
                     UNIQUE (usuario_id, periodo_id)
                 );
             """)
+            # 15. POSTULACIÓN
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS postulacion (
+                    id SERIAL PRIMARY KEY,
+                    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+                    periodo_id INTEGER NOT NULL REFERENCES periodos(id) ON DELETE CASCADE,
+                    area_id INTEGER NOT NULL REFERENCESt area(id) ON DELETE CASCADE,
+                    verificado VARCHAR(20) NOT NULL CHECK (verificado IN ('SI', 'NO', 'EN_PROCESO')),
+                    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    fecha_verificacion TIMESTAMP,
+                    UNIQUE (usuario_id, periodo_id, area_id)
+                );
+            """)
 
             conn.commit()
             print("Tablas del sistema SIPU creadas correctamente")
