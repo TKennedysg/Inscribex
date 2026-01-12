@@ -4,7 +4,8 @@ from psycopg2.extras import RealDictCursor
 
 duracion_carreras_bp = Blueprint('duracion_carreras', __name__)
 
-@duracion_carreras_bp.route('/duracion-carreras', methods=['GET'])
+#OBTENER DURACION CARRERAS GET
+@duracion_carreras_bp.route('/obtener/duracion-carreras', methods=['GET'])
 def obtener_duracion_carreras():
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -14,7 +15,7 @@ def obtener_duracion_carreras():
     conn.close()
     return jsonify(resultado)
 
-
+#CREAR DURACION CARRERA POST
 @duracion_carreras_bp.route('/duracion-carreras', methods=['POST'])
 def crear_duracion_carrera():
     datos = request.json
@@ -39,7 +40,7 @@ def crear_duracion_carrera():
 
     return jsonify(nueva_duracion), 201
 
-
+#ACTUALIZAR DURACION CARRERA PUT
 @duracion_carreras_bp.route('/duracion-carreras/<int:id>', methods=['PUT'])
 def actualizar_duracion_carrera(id):
     datos = request.json
@@ -65,7 +66,7 @@ def actualizar_duracion_carrera(id):
 
     return jsonify(duracion_actualizada)
 
-
+#ELIMINAR DURACION CARRERA DELETE
 @duracion_carreras_bp.route('/duracion-carreras/<int:id>', methods=['DELETE'])
 def eliminar_duracion_carrera(id):
     conn = get_db_connection()

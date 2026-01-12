@@ -5,12 +5,12 @@ from psycopg2.extras import RealDictCursor
 periodos_bp = Blueprint('periodos', __name__)
 
 # --- 1. OBTENER PERÍODOS (GET) ---
-@periodos_bp.route('/periodos', methods=['GET'])
+@periodos_bp.route('/obtener/periodos', methods=['GET'])
 def obtener_periodos():
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
-    cur.execute("SELECT * FROM periodos ORDER BY anio, periodo")
+    cur.execute("SELECT * FROM periodos ORDER BY nombre_periodo")
     resultado = cur.fetchall()
 
     cur.close()
@@ -23,19 +23,18 @@ def obtener_periodos():
 def crear_periodo():
     datos = request.json
 
-    anio = datos.get('anio')
-    periodo = datos.get('periodo')
+    nombre_periodo = datos.get('nombre_periodo')
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
     cur.execute(
         """
-        INSERT INTO periodos (anio, periodo)
-        VALUES (%s, %s)
+        INSERT INTO periodos (nombre_periodo)
+        VALUES (%s)
         RETURNING *
         """,
-        (anio, periodo)
+        (nombre_periodo,)
     )
 
     nuevo_periodo = cur.fetchone()
@@ -51,8 +50,7 @@ def crear_periodo():
 def actualizar_periodo(id):
     datos = request.json
 
-    anio = datos.get('anio')
-    periodo = datos.get('periodo')
+    nombre_periodo = datos.get('nombre_periodo')
 
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -60,12 +58,11 @@ def actualizar_periodo(id):
     cur.execute(
         """
         UPDATE periodos
-        SET anio = %s,
-            periodo = %s
+        SET nombre_periodo = %s
         WHERE id = %s
         RETURNING *
         """,
-        (anio, periodo, id)
+        (nombre_periodo, id)
     )
 
     periodo_actualizado = cur.fetchone()

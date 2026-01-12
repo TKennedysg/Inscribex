@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from abc import ABC, abstractmethod
 from datetime import datetime
-from database import ConexionDB  # <--- IMPORTANTE: Importamos la conexión
+from dbconexion import get_db_connection  # <--- IMPORTANTE: Importamos la conexión
 
 # --- CLASE BASE ---
 class Usuario(ABC):
@@ -39,7 +39,7 @@ class Aspirante(Usuario):
         self.__estado = "pre-inscrito"
         self.__documentos = {}
         # Instanciamos la conexión
-        self.db = ConexionDB() 
+        self.db = get_db_connection() 
 
     # ... (Tus propiedades @estado y métodos de documentos se quedan igual) ...
     @property
@@ -62,18 +62,18 @@ class Aspirante(Usuario):
         # SQL para insertar en la tabla 'usuarios'
         # Nota: Asignamos 'aspirante' como rol por defecto y password genérico '1234' por ahora
         sql = """
-            INSERT INTO usuarios (cedula, nombre, correo, password, rol, telefono, direccion, estado)
-            VALUES (%s, %s, %s, '1234', 'aspirante', %s, %s, %s)
+            INSERT INTO usuarios (nombre, apellido, cedula, contrasena, rol, estado)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """
         
         # Valores a insertar
         datos = (
-            self.cedula, 
             self.nombre, 
-            self.correo, 
-            self.telefono, 
-            self.direccion, 
-            self.__estado
+            self.apellido, 
+            self.cedula, 
+            self.contrasena, 
+            self.rol, 
+            self.estado
         )
         
         try:
@@ -94,10 +94,11 @@ class Aspirante(Usuario):
 class AspiranteBuilder:
     def __init__(self):
         self.nombre = None
+        self.apellido = None
         self.cedula = None
-        self.correo = None
-        self.telefono = None
-        self.direccion = None
+        self.contrasena = None
+        self.rol = None
+        self.estado = None
 
     def con_datos_personales(self, nombre, cedula, correo):
         self.nombre = nombre

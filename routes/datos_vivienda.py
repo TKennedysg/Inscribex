@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from dbconexion import get_db_connection
 from psycopg2.extras import RealDictCursor
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 vivienda_bp = Blueprint('vivienda', __name__)
 
@@ -135,3 +136,42 @@ def eliminar_vivienda(id):
     conn.close()
 
     return jsonify({"mensaje": f"Domicilio con ID {id} eliminado correctamente"}), 200
+
+
+    # obtener informacion mediante jwtoken
+@vivienda_bp.route('/domicilio', methods=['GET'])
+@jwt_required()
+def obtener_mi_domicilio():
+    try:
+        # ID del usuario desde el JWT
+        usuario_id = get_jwt_identity()
+
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+
+        query = """
+            SELECT
+                id,
+                barrio,
+                calle_principal,
+                calle_secundaria,
+                numero_domicilio,
+                tipo_vivienda
+            FROM domicilio
+            WHERE usuario_id = %s
+        """
+
+        cur.execute(query, (usuario_id,))
+        domicilio = cur.fetchone()
+
+        cur.close()
+        conn.close()
+
+        if domicilio:
+            return jsonify(domicilio), 200
+        else:
+            return jsonify({"mensaje": "Domicilio no registrado"}), 404
+
+    except Exception as e:
+        print("Error al obtener domicilio:", e)
+        return jsonify({"error": str(e)}), 500

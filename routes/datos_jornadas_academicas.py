@@ -5,7 +5,7 @@ from psycopg2.extras import RealDictCursor
 jornadas_academicas_bp = Blueprint('jornadas_academicas', __name__)
 
 # --- OBTENER TODAS LAS JORNADAS (GET) ---
-@jornadas_academicas_bp.route('/jornadas-academicas', methods=['GET'])
+@jornadas_academicas_bp.route('/obtener/jornadas', methods=['GET'])
 def obtener_jornadas():
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -94,3 +94,4 @@ def eliminar_jornada(id):
         return jsonify({'mensaje': 'Jornada no encontrada'}), 404
 
     return jsonify(jornada_eliminada), 200
+

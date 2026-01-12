@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from dbconexion import get_db_connection
 from psycopg2.extras import RealDictCursor
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 datos_academicos_bp = Blueprint('datos_academicos', __name__)
 
@@ -23,7 +24,7 @@ def crear_datos_academicos():
     usuario_id = datos.get('usuario_id')
     titulo_homologado = datos.get('titulo_homologado')
     unidad_educativa = datos.get('unidad_educativa')
-    tipo_unidad_educativa = datos.get('tipo_unidad_educativa')
+    tipo_unidad_educativa_id = datos.get('tipo_unidad_educativa_id')
     calificacion = datos.get('calificacion')
     cuadro_honor = datos.get('cuadro_honor')
     titulo_tercer_nivel = datos.get('titulo_tercer_nivel')
@@ -39,7 +40,7 @@ def crear_datos_academicos():
             usuario_id,
             titulo_homologado,
             unidad_educativa,
-            tipo_unidad_educativa,
+            tipo_unidad_educativa_id,
             calificacion,
             cuadro_honor,
             titulo_tercer_nivel,
@@ -53,7 +54,7 @@ def crear_datos_academicos():
             usuario_id,
             titulo_homologado,
             unidad_educativa,
-            tipo_unidad_educativa,
+            tipo_unidad_educativa_id,
             calificacion,
             cuadro_honor,
             titulo_tercer_nivel,
@@ -70,7 +71,7 @@ def crear_datos_academicos():
     return jsonify(nuevo_registro), 201
 
 
-
+#ACTUALIZAR DATOS ACADÉMICOS (PUT)
 @datos_academicos_bp.route('/datos-academicos/<int:id>', methods=['PUT'])
 def actualizar_datos_academicos(id):
     datos = request.json
@@ -78,7 +79,7 @@ def actualizar_datos_academicos(id):
     usuario_id = datos.get('usuario_id')
     titulo_homologado = datos.get('titulo_homologado')
     unidad_educativa = datos.get('unidad_educativa')
-    tipo_unidad_educativa = datos.get('tipo_unidad_educativa')
+    tipo_unidad_educativa_id = datos.get('tipo_unidad_educativa_id')
     calificacion = datos.get('calificacion')
     cuadro_honor = datos.get('cuadro_honor')
     titulo_tercer_nivel = datos.get('titulo_tercer_nivel')
@@ -95,7 +96,7 @@ def actualizar_datos_academicos(id):
             usuario_id = %s,
             titulo_homologado = %s,
             unidad_educativa = %s,
-            tipo_unidad_educativa = %s,
+            tipo_unidad_educativa_id = %s,
             calificacion = %s,
             cuadro_honor = %s,
             titulo_tercer_nivel = %s,
@@ -108,7 +109,7 @@ def actualizar_datos_academicos(id):
             usuario_id,
             titulo_homologado,
             unidad_educativa,
-            tipo_unidad_educativa,
+            tipo_unidad_educativa_id,
             calificacion,
             cuadro_honor,
             titulo_tercer_nivel,
@@ -156,3 +157,45 @@ def eliminar_datos_academicos(id):
     conn.close()
 
     return jsonify({"mensaje": f"Registro académico con ID {id} eliminado correctamente"}), 200
+
+
+# 5. OBTENER MIS DATOS ACADÉMICOS  MEDIANTE JWT (GET)
+@datos_academicos_bp.route('/datos-academicos', methods=['GET'])
+@jwt_required()
+def obtener_datos_academicos_jwt():
+    try:
+        # ID del usuario obtenido desde el JWT
+        usuario_id = get_jwt_identity()
+
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+
+        query = """
+            SELECT
+                id,
+                titulo_homologado,
+                unidad_educativa,
+                tipo_unidad_educativa_id,
+                calificacion,
+                cuadro_honor,
+                titulo_tercer_nivel,
+                titulo_cuarto_nivel,
+                fecha_registro_nacional
+            FROM datos_academicos
+            WHERE usuario_id = %s
+        """
+
+        cur.execute(query, (usuario_id,))
+        datos_academicos = cur.fetchone()
+
+        cur.close()
+        conn.close()
+
+        if datos_academicos:
+            return jsonify(datos_academicos), 200
+        else:
+            return jsonify({"mensaje": "Datos académicos no registrados"}), 404
+
+    except Exception as e:
+        print("Error al obtener datos académicos:", e)
+        return jsonify({"error": str(e)}), 500

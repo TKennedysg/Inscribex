@@ -32,48 +32,44 @@ def obtener_datos_demograficos():
 def crear_datos_demograficos():
     datos = request.json
     usuario_id = datos.get('usuario_id')
-    nacionalidad = datos.get('nacionalidad')
+    nacionalidad_id = datos.get('nacionalidad_id')
     fecha_nacimiento = datos.get('fecha_nacimiento')
-    estado_civil = datos.get('estado_civil')
-    sexo = datos.get('sexo')
-    autoidentificacion = datos.get('autoidentificacion')
+    estado_civil_id = datos.get('estado_civil_id')
+    sexo_id = datos.get('sexo_id')
     discapacidad = datos.get('discapacidad')
-    pais = datos.get('pais')
-    provincia = datos.get('provincia')
-    ciudad = datos.get('ciudad')
-
+    pais_id = datos.get('pais_id')
+    provincia_id = datos.get('provincia_id')
+    ciudad_id = datos.get('ciudad_id')
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
     sql = """
         INSERT INTO datos_demograficos (
             usuario_id,
-            nacionalidad,
+            nacionalidad_id,
             fecha_nacimiento,
-            estado_civil,
-            sexo,
-            autoidentificacion,
+            estado_civil_id,
+            sexo_id,
             discapacidad,
-            pais,
-            provincia,
-            ciudad
+            pais_id,
+            provincia_id,
+            ciudad_id
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING *
     """
 
     try:
         cur.execute(sql, (
             usuario_id,
-            nacionalidad,
+            nacionalidad_id,
             fecha_nacimiento,
-            estado_civil,
-            sexo,
-            autoidentificacion,
+            estado_civil_id,
+            sexo_id,
             discapacidad,
-            pais,
-            provincia,
-            ciudad
+            pais_id,
+            provincia_id,
+            ciudad_id
         ))
 
         nuevo_registro = cur.fetchone()
@@ -95,45 +91,41 @@ def crear_datos_demograficos():
 def actualizar_datos_demograficos(id):
     datos = request.json
 
-    nacionalidad = datos.get('nacionalidad')
+    nacionalidad_id = datos.get('nacionalidad_id')
     fecha_nacimiento = datos.get('fecha_nacimiento')
-    estado_civil = datos.get('estado_civil')
-    sexo = datos.get('sexo')
-    autoidentificacion = datos.get('autoidentificacion')
+    estado_civil_id = datos.get('estado_civil_id')
+    sexo_id = datos.get('sexo_id')
     discapacidad = datos.get('discapacidad')
-    pais = datos.get('pais')
-    provincia = datos.get('provincia')
-    ciudad = datos.get('ciudad')
-
+    pais_id = datos.get('pais_id')
+    provincia_id = datos.get('provincia_id')
+    ciudad_id = datos.get('ciudad_id')
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
     sql = """
         UPDATE datos_demograficos
-        SET nacionalidad = %s,
+        SET nacionalidad_id = %s,
             fecha_nacimiento = %s,
-            estado_civil = %s,
-            sexo = %s,
-            autoidentificacion = %s,
+            estado_civil_id = %s,
+            sexo_id = %s,
             discapacidad = %s,
-            pais = %s,
-            provincia = %s,
-            ciudad = %s
+            pais_id = %s,
+            provincia_id = %s,
+            ciudad_id = %s
         WHERE id = %s
         RETURNING *
     """
 
     try:
         cur.execute(sql, (
-            nacionalidad,
+            nacionalidad_id,
             fecha_nacimiento,
-            estado_civil,
-            sexo,
-            autoidentificacion,
+            estado_civil_id,
+            sexo_id,
             discapacidad,
-            pais,
-            provincia,
-            ciudad,
+            pais_id,
+            provincia_id,
+            ciudad_id,
             id
         ))
 
@@ -197,7 +189,7 @@ def actualizar_datos_demograficos_jwt():
         return jsonify({"mensaje": "No hay datos para actualizar"}), 400
 
     # Campos que el propio usuario tiene permiso de cambiar
-    campos_permitidos = ['nacionalidad', 'fecha_nacimiento', 'estado_civil', 'sexo', 'autoidentificacion', 'discapacidad', 'pais', 'provincia', 'ciudad']
+    campos_permitidos = ['nacionalidad_id', 'fecha_nacimiento', 'estado_civil_id', 'sexo_id', 'discapacidad', 'pais_id', 'provincia_id', 'ciudad_id']
     partes_sql = []
     valores = []
 
@@ -215,7 +207,7 @@ def actualizar_datos_demograficos_jwt():
     cur = conn.cursor(cursor_factory=RealDictCursor)
     
     try:
-        query = f"UPDATE datos_demograficos SET {', '.join(partes_sql)} WHERE id = %s RETURNING id, nacionalidad, fecha_nacimiento, estado_civil, sexo, autoidentificacion, discapacidad, pais, provincia, ciudad"
+        query = f"UPDATE datos_demograficos SET {', '.join(partes_sql)} WHERE id = %s RETURNING id, nacionalidad_id, fecha_nacimiento, estado_civil_id, sexo_id, discapacidad, pais_id, provincia_id, ciudad_id"
         cur.execute(query, tuple(valores))
         datos_actualizados = cur.fetchone()
         conn.commit()
@@ -270,7 +262,7 @@ def crear_datos_demograficos_jwt():
     datos = request.json
 
     # 2. Validación de campos requeridos (según tu esquema NOT NULL)
-    campos_requeridos = ['nacionalidad', 'fecha_nacimiento', 'estado_civil', 'sexo', 'autoidentificacion', 'discapacidad', 'pais', 'provincia', 'ciudad']
+    campos_requeridos = ['nacionalidad_id', 'fecha_nacimiento', 'estado_civil_id', 'sexo_id', 'discapacidad', 'pais_id', 'provincia_id', 'ciudad_id']
     for campo in campos_requeridos:
         if campo not in datos or datos[campo] is None:
             return jsonify({"mensaje": f"El campo {campo} es obligatorio"}), 400
@@ -282,21 +274,20 @@ def crear_datos_demograficos_jwt():
         # 3. Insertar datos
         # Nota: Usamos usuario_id como la columna de referencia
         query = """
-            INSERT INTO datos_demograficos (usuario_id, nacionalidad, fecha_nacimiento, estado_civil, sexo, autoidentificacion, discapacidad, pais, provincia, ciudad)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO datos_demograficos (usuario_id, nacionalidad_id, fecha_nacimiento, estado_civil_id, sexo_id, discapacidad, pais_id, provincia_id, ciudad_id)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING *
         """
         valores = (
             usuario_id, 
-            datos['nacionalidad'], 
+            datos['nacionalidad_id'], 
             datos['fecha_nacimiento'], 
-            datos['estado_civil'], 
-            datos['sexo'], 
-            datos['autoidentificacion'], 
+            datos['estado_civil_id'], 
+            datos['sexo_id'], 
             datos['discapacidad'], 
-            datos['pais'], 
-            datos['provincia'], 
-            datos['ciudad']
+            datos['pais_id'], 
+            datos['provincia_id'], 
+            datos['ciudad_id']
         )
         
         cur.execute(query, valores)
@@ -319,3 +310,4 @@ def crear_datos_demograficos_jwt():
     finally:
         cur.close()
         conn.close()
+

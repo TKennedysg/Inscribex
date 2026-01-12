@@ -11,3 +11,28 @@ LEFT JOIN domicilio d ON u.id = d.usuario_id
 LEFT JOIN servicios_basicos sb ON u.id = sb.usuario_id
 LEFT JOIN datos_academicos da ON u.id = da.usuario_id
 WHERE u.id = 13;
+
+-- consulta de todas las carreras con sus datos completos
+SELECT 
+    c.id,
+    c.nombre_carrera,
+    f.nombre_facultad,
+    d.nombre_duracion
+FROM carreras c
+JOIN facultades f ON c.id_facultad = f.id
+JOIN duracion_carreras d ON c.id_duracion_carrera = d.id;
+
+-- consulta de una carrera por id con sus datos completos
+SELECT 
+    c.id,
+    c.nombre_carrera,
+    f.nombre_facultad,
+    d.nombre_duracion
+FROM carreras c
+JOIN facultades f ON c.id_facultad = f.id
+JOIN duracion_carreras d ON c.id_duracion_carrera = d.id
+WHERE c.id = 5;
+
+
+-- ejecutar archivo facultades.py
+python -m modulo_oferta.facultad

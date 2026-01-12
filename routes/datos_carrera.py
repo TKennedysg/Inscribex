@@ -4,15 +4,62 @@ from psycopg2.extras import RealDictCursor
 
 datos_carreras_bp = Blueprint('datos_carreras', __name__)
 
-@datos_carreras_bp.route('/datos-carreras', methods=['GET'])
+# --- 1. OBTENER TODOS (GET) ---
+@datos_carreras_bp.route('/obtener/carreras', methods=['GET'])
 def obtener_datos_carreras():
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute('SELECT * FROM carreras ORDER BY id ASC') # Agregué orden
+        resultado = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify(resultado)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+#OBTENER UNA CARRERA POR ID
+@datos_carreras_bp.route('/datos-carreras/<int:id>', methods=['GET'])
+def obtener_datos_carrera_por_id(id):
     conn = get_db_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute('SELECT * FROM datos_carreras')
-    resultado = cur.fetchall()
-    cur.close()
-    conn.close()
-    return jsonify(resultado)
+    if conn is None:
+        return
+
+    try:
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        cursor.execute("""
+            SELECT 
+                c.id,
+                c.nombre_carrera,
+                f.nombre_facultad,
+                d.nombre_duracion
+            FROM carreras c
+            JOIN facultades f ON c.id_facultad = f.id
+            JOIN duracion_carreras d ON c.id_duracion_carrera = d.id
+            WHERE c.id = %s
+        """, (id,))
+
+        carrera = cursor.fetchone()
+
+        if carrera:
+            print("\nDETALLE DE LA CARRERA:")
+            print(f"ID: {carrera[0]}")
+            print(f"Carrera: {carrera[1]}")
+            print(f"Facultad: {carrera[2]}")
+            print(f"Duración: {carrera[3]}")
+        else:
+            print("❌ No se encontró una carrera con ese ID")
+
+    except Exception as e:
+        print("Error al obtener la carrera:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    return jsonify(carrera)
+
+
 
 
 @datos_carreras_bp.route('/datos-carreras', methods=['POST'])
