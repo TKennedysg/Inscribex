@@ -251,6 +251,7 @@ class Usuario:
                 );
             """)
 
+<<<<<<< HEAD
             # 24. OFERTA ACADEMICA
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS oferta_academica (
@@ -304,6 +305,26 @@ class Usuario:
                 );
             """)
            
+=======
+            # 17. Inscripcion 
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS datos_inscripcion (
+                    id SERIAL PRIMARY KEY,
+                    usuario_id INTEGER NOT NULL
+                    REFERENCES usuarios(id) ON DELETE CASCADE,
+                    periodo_id INTEGER NOT NULL
+                    REFERENCES periodos(id) ON DELETE CASCADE,
+                    carrera_id INTEGER NOT NULL
+                    REFERENCES datos_carreras(id) ON DELETE CASCADE,
+                    sede_id INTEGER NOT NULL
+                    REFERENCES sedes(id),
+                    numero_intencion INTEGER DEFAULT 1,
+                    fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE (usuario_id, periodo_id)
+                );
+            """)
+
+>>>>>>> 3f51995a21a6ae940aba8f16aacfdf6357971860
             conn.commit()
             print("Tablas del sistema SIPU creadas correctamente")
 
